@@ -59,8 +59,7 @@ const navbarMuiStyles = makeStyles({
 });
 
 const Navbar = () => {
-  const { user } = useSelector((state) => state.auth);
-  const { key } = useSelector((state) => state.auth);
+  const { user, key} = useSelector((state) => state.auth);
   const dispatch = useDispatch()
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
