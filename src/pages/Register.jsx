@@ -12,9 +12,11 @@ import formLogo from "../assets/formLogo.png";
 import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
-import { createUser } from '../helpers/firebase'
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setCurrentUser, clearCurrentUser } from "../redux/actions/authActions";
+
 
 const signUpValidationSchema = Yup.object({
   userName: Yup.string()
@@ -36,8 +38,8 @@ const signUpValidationSchema = Yup.object({
 });
 
 const Register = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({});
   const initialValues = {
     userName: "",
     email: "",
@@ -45,21 +47,49 @@ const Register = () => {
     password2: ""
   };
 
+//! register func
+
+// const signUp = (data) => {
+// console.log("BUUURAAAAYAAAA BAAAAK --> 1111");
+// axios.post('http://127.0.0.1:8000/auth/register/', data)
+// .then(response => {
+//   console.log("BUUURAAAAYAAAA BAAAAK --> 2222");
+//   dispatch(setCurrentUser(response.data))
+//   navigate('/')
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
+// }
+const signUp = async(data) => {
+console.log("BUUURAAAAYAAAA BAAAAK --> 1111");
+try {
+  const res = await axios.post('http://127.0.0.1:8000/auth/register/', data)
+  let userData = {
+    key : res.data.token,
+    user : {
+      username : res.data.username,
+      email : res.data.email
+    }
+  }
+  dispatch(setCurrentUser(userData))
+  navigate('/')
+} catch (error) {
+  console.log(error);
+}}
+
   const handleSubmit = (values, { resetForm }) => {
-    setUserInfo({
-      userName: values.userName,
+    console.log("BUUURAAAAYAAAA BAAAAK --> 0000");
+    let data = {
+      username : values.userName,
       email: values.email,
       password: values.password,
-      password2: values.password2,
-      // username: ${values.username},
-      // email: ${values.email},
-      // password: ${values.password},
-      // password2: ${values.password2},
-    });
-    createUser(values.email,values.password, values.userName, values.password2, navigate)
+      password2: values.password2
+    } 
+    console.log("BUUURAAAAYAAAA BAAAAK --> 3333");
+    signUp(data)
     resetForm();
   };
-  console.log(userInfo);
 
   return (
     <Box
@@ -67,7 +97,6 @@ const Register = () => {
         backgroundImage: "url(https://picsum.photos/1300/800)",
         backgroundRepeate: "no-repeat",
         pt: "1.5rem",
-        mt: "4rem",
         pb: "2rem",
       }}
     >

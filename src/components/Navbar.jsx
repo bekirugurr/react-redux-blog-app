@@ -119,7 +119,7 @@ const Navbar = () => {
           )}
           <Box sx={{ flexGrow: 0 }}>
             {user ? (
-              profileimg ? (
+              user.profile && user.profile.profile_pic ? (
                 <IconButton onClick={handleOpenUserMenu} sx={{padding: "0", marginTop:".3rem"}}>
                   <Avatar
                     alt="User Avatar"
