@@ -16,30 +16,34 @@ import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import CreateIcon from '@mui/icons-material/Create';
-import { logOut, logout } from '../helpers/firebase'
+import { logOut} from '../helpers/firebase'
+import {  useSelector } from "react-redux";
+
 
 const navbarMuiStyles = makeStyles({
   toolbar: {
     display: "flex",
     justifyContent: "space-between",
     position: "relative",
+    height: "3.2rem",
+
   },
   logo: {
-    height: "4rem",
+    height: "3.2rem",
     cursor: "pointer",
   },
   nameArea: {
     display: "flex",
     alignItems: "center",
     px: "1.2rem",
-    fontSize: "1.2rem",
+    fontSize: "1rem",
     position: "absolute",
     right: "4.5rem",
-    top: "1.2rem",
+    top: "1.1rem",
     fontFamily: "Roboto",
   },
   menuItems: {
-    fontSize: "1.3rem",
+    fontSize: "1rem",
     px: "1rem",
     textAlign:"center"
   },
@@ -48,16 +52,18 @@ const navbarMuiStyles = makeStyles({
     fontFamily: "Girassol",
     position: "absolute",
     right: "calc(50% - 5.8rem)",
-    top: "1rem",
+    top: ".6rem",
+    
   },
 });
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.auth);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  const currentUser = true;
   const profileimg = true;
   const classes = navbarMuiStyles();
   const handleLogoClick = () => {
@@ -84,11 +90,11 @@ const Navbar = () => {
   }
 
   return (
-    <AppBar color="primary" sx={{position: "fixed",
+    <AppBar color="primary" position="static" sx={{ height:"3.2rem",
     top: "0",
     left: "0"}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters className={classes.toolbar}>
+        <Toolbar disableGutters className={classes.toolbar} variant="dense">
           <Box
             component="img"
             className={classes.logo}
@@ -100,30 +106,30 @@ const Navbar = () => {
             <Typography
               variant="h5"
               className={classes.middleText}
-              sx={{ fontFamily: "Girassol" }}
+              sx={{ fontFamily: "Girassol", display: { xs: 'none', md: 'flex' } }}
             >
               ────Blog────
             </Typography>
           </Box>
 
-          {currentUser && (
+          {user && (
             <Typography className={classes.nameArea} variant="body">
-              Bekir Uğur
+              {user.username}
             </Typography>
           )}
           <Box sx={{ flexGrow: 0 }}>
-            {currentUser ? (
+            {user ? (
               profileimg ? (
-                <IconButton onClick={handleOpenUserMenu} sx={{padding: "0"}}>
+                <IconButton onClick={handleOpenUserMenu} sx={{padding: "0", marginTop:".3rem"}}>
                   <Avatar
-                    alt="CurrentUser Name"
-                    src={profilimg}
-                    sx={{ height: "2.7rem", width: "2.7rem" }}
+                    alt="User Avatar"
+                    src={user.profile.profile_pic}
+                    sx={{ height: "2.5rem", width: "2.5rem" }}
                   />
                 </IconButton>
               ) : (
-                <IconButton onClick={handleOpenUserMenu} sx={{padding:"0"}}>
-                  <Avatar sx={{ bgcolor: "white" }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{padding:"0", marginTop:".3rem"}}>
+                  <Avatar sx={{ bgcolor: "white",height: "2rem", width: "2rem" }}>
                     <PersonIcon color="primary" />
                   </Avatar>
                 </IconButton>
@@ -149,7 +155,7 @@ const Navbar = () => {
               </>
             )}
             <Menu
-              sx={{ my: "55px" }}
+              sx={{ my: "40px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -178,7 +184,7 @@ const Navbar = () => {
                   New
                 </Typography>
               </MenuItem>
-              {currentUser && (
+              {user && (
                 <MenuItem onClick={handleLogOut}>
                   <Typography className={classes.menuItems}>
                     Logout

@@ -15,6 +15,11 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { signIn, signUpProvider } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {  useDispatch } from "react-redux";
+import { setCurrentUser, clearCurrentUser } from "../redux/actions/authActions";
+
+
 
 
 const loginValidationSchema = Yup.object({
@@ -28,23 +33,34 @@ const loginValidationSchema = Yup.object({
     .matches(/[!?.@#$%^&*()-+]+/, "Password must have a special char!"),
 });
 const Login = () => {
-  const [userInfo, setUserInfo] = useState({});
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const initialValues = {
     email: "",
     password: "",
   };
 
+//! log in function
+const logIn = (data) => {
+  axios.post('http://127.0.0.1:8000/auth/login/', data)
+  .then(response => {
+    dispatch(setCurrentUser(response.data))
+    navigate('/')
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
   const handleSubmit = (values, { resetForm }) => {
-    setUserInfo({
-      email: values.email,
-      password: values.password,
-    });
-    signIn(values.email, values.password, navigate)
+    let data = {
+      email : values.email,
+      password : values.password
+    }
+    logIn(data)
     resetForm();
   };
 
-  
+ 
   const handleProviderLogin = () => {
     signUpProvider(navigate)
   }
@@ -54,7 +70,6 @@ const Login = () => {
         backgroundImage: "url(https://picsum.photos/1300/800)",
         backgroundRepeate: "no-repeat",
         pt: "1.5rem",
-        mt: "4rem",
         pb: "2rem",
       }}
     >
