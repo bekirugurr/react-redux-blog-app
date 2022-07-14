@@ -5,5 +5,5 @@ export const setCurrentUser = (user) => ({
   payload: user
 })
 export const clearCurrentUser = () => ({
-  type: CLEAR_USER,
+  type: CLEAR_USER
 })

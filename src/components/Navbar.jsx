@@ -16,8 +16,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import CreateIcon from '@mui/icons-material/Create';
-import { logOut} from '../helpers/firebase'
-import {  useSelector } from "react-redux";
+import {  useSelector, useDispatch } from "react-redux";
+import { clearCurrentUser } from "../redux/actions/authActions";
+import axios from "axios";
 
 
 const navbarMuiStyles = makeStyles({
@@ -59,13 +60,44 @@ const navbarMuiStyles = makeStyles({
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
+  const { key } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  const profileimg = true;
   const classes = navbarMuiStyles();
+
+  const logIn = (data) => {
+    axios.post('http://127.0.0.1:8000/auth/login/', data)
+    .then(response => {
+      dispatch(clearCurrentUser)
+      navigate('/')
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  const logout = () => {
+    console.log(key);
+    let config = {
+      method : 'post',
+      url : "http://127.0.0.1:8000/auth/logout/",
+      headers : {
+        Authorization : `Token ${key}`
+      }
+    }
+    axios(config)
+    .then(response => {
+      dispatch(clearCurrentUser())
+      navigate('/')
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
   const handleLogoClick = () => {
     navigate("/");
   };
@@ -86,7 +118,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     handleCloseUserMenu()
-    logOut()
+    logout()
   }
 
   return (
