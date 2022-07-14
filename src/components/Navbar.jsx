@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+import CreateIcon from '@mui/icons-material/Create';
+import { logOut, logout } from '../helpers/firebase'
 
 const navbarMuiStyles = makeStyles({
   toolbar: {
@@ -23,17 +25,17 @@ const navbarMuiStyles = makeStyles({
     position: "relative",
   },
   logo: {
-    width: "5rem",
+    height: "4rem",
     cursor: "pointer",
   },
   nameArea: {
     display: "flex",
     alignItems: "center",
     px: "1.2rem",
-    fontSize: "1.4rem",
+    fontSize: "1.2rem",
     position: "absolute",
     right: "4.5rem",
-    top: "1.5rem",
+    top: "1.2rem",
     fontFamily: "Roboto",
   },
   menuItems: {
@@ -41,18 +43,12 @@ const navbarMuiStyles = makeStyles({
     px: "1rem",
     textAlign:"center"
   },
-  avatar: {
-    width: "3.5rem",
-    height: "3.5rem",
-    mx: ".25rem",
-    backgroundColor: "tomato",
-  },
   middleText: {
     cursor: "pointer",
     fontFamily: "Girassol",
     position: "absolute",
     right: "calc(50% - 5.8rem)",
-    top: "1.4rem",
+    top: "1rem",
   },
 });
 
@@ -81,6 +77,11 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogOut = () => {
+    handleCloseUserMenu()
+    logOut()
+  }
 
   return (
     <AppBar color="primary" sx={{position: "fixed",
@@ -113,28 +114,39 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             {currentUser ? (
               profileimg ? (
-                <IconButton onClick={handleOpenUserMenu}>
+                <IconButton onClick={handleOpenUserMenu} sx={{padding: "0"}}>
                   <Avatar
                     alt="CurrentUser Name"
                     src={profilimg}
-                    sx={{ height: "3.3rem", width: "3rem" }}
+                    sx={{ height: "2.7rem", width: "2.7rem" }}
                   />
                 </IconButton>
               ) : (
-                <IconButton onClick={handleOpenUserMenu}>
+                <IconButton onClick={handleOpenUserMenu} sx={{padding:"0"}}>
                   <Avatar sx={{ bgcolor: "white" }}>
                     <PersonIcon color="primary" />
                   </Avatar>
                 </IconButton>
               )
             ) : (
+              <>
               <Button
-                size="large"
+                size="medium"
                 sx={{ color: "white", textTransform: "capitalize" }}
                 endIcon={<LockOpenOutlinedIcon size="large" />}
+                onClick={()=>navigate("/login")}
               >
                 Login
               </Button>
+              <Button
+                size="medium"
+                sx={{ color: "white", textTransform: "capitalize" }}
+                endIcon={<CreateIcon size="large" />}
+                onClick={()=>navigate("/Register")}
+              >
+                SignUp
+              </Button>
+              </>
             )}
             <Menu
               sx={{ my: "55px" }}
@@ -166,8 +178,8 @@ const Navbar = () => {
                   New
                 </Typography>
               </MenuItem>
-              {!currentUser && (
-                <MenuItem onClick={handleCloseUserMenu}>
+              {currentUser && (
+                <MenuItem onClick={handleLogOut}>
                   <Typography className={classes.menuItems}>
                     Logout
                   </Typography>

@@ -13,6 +13,8 @@ import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import { createUser } from '../helpers/firebase'
+import { useNavigate } from "react-router-dom";
 
 const signUpValidationSchema = Yup.object({
   userName: Yup.string()
@@ -27,14 +29,20 @@ const signUpValidationSchema = Yup.object({
     .matches(/[a-z]+/, "Password must have a lowercase!")
     .matches(/[A-Z]+/, "Password must have a uppercase!")
     .matches(/[!?.@#$%^&*()-+]+/, "Password must have a special char!"),
+  password2: Yup.string()
+    .required("No password provided")
+    .min(8, "Password is too short - should be 8 chars minimum")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
 const Register = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const initialValues = {
     userName: "",
     email: "",
     password: "",
+    password2: ""
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -42,7 +50,13 @@ const Register = () => {
       userName: values.userName,
       email: values.email,
       password: values.password,
+      password2: values.password2,
+      // username: ${values.username},
+      // email: ${values.email},
+      // password: ${values.password},
+      // password2: ${values.password2},
     });
+    createUser(values.email,values.password, values.userName, values.password2, navigate)
     resetForm();
   };
   console.log(userInfo);
@@ -50,9 +64,9 @@ const Register = () => {
   return (
     <Box
       sx={{
-        backgroundImage: "url(https://picsum.photos/1600/900)",
+        backgroundImage: "url(https://picsum.photos/1300/800)",
         backgroundRepeate: "no-repeat",
-        pt: "2.5rem",
+        pt: "1.5rem",
         mt: "4rem",
         pb: "2rem",
       }}
@@ -61,18 +75,18 @@ const Register = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          p: "2.5rem",
+          p: "1.5rem 2.5rem",
           alignItems: "center",
           width: "27rem",
           mx: "auto",
-          bgcolor: "rgba(255,255,255, 0.5)",
+          bgcolor: "rgba(255,255,255, 0.7)",
           borderRadius: "7px",
         }}
       >
         <Card
           sx={{
-            width: "12rem",
-            height: "12rem",
+            width: "8rem",
+            height: "8rem",
             p: "1rem",
             backgroundColor: "#1976D2",
             borderRadius: "50%",
@@ -102,7 +116,7 @@ const Register = () => {
         >
           {({ values, handleChange, handleSubmit, errors, touched, handleBlur}) => (
             <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
@@ -142,6 +156,20 @@ const Register = () => {
                     onChange={handleChange}
                     helperText={touched.password &&  errors.password}
                     error={touched.password &&  Boolean(errors.password)}
+                    onBlur={handleBlur}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    name="password2"
+                    label="Password Again"
+                    type="password"
+                    variant="outlined"
+                    value={values.password2}
+                    onChange={handleChange}
+                    helperText={touched.password2 &&  errors.password2}
+                    error={touched.password2 &&  Boolean(errors.password2)}
                     onBlur={handleBlur}
                     />
                 </Grid>

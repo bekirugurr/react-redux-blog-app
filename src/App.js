@@ -1,7 +1,8 @@
 import "./App.css";
-import AppRouter from "./router/AppRouter";
+import Router from "./router/Router";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Girassol from "./assets/Girassol.ttf";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const myTheme = createTheme({
@@ -12,7 +13,8 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={myTheme}>
-        <AppRouter />
+        <Router />
+        <ToastContainer /> 
       </ThemeProvider>
     </div>
   );

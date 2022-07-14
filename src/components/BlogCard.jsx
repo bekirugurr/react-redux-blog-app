@@ -16,7 +16,6 @@ const navigate = useNavigate()
 const handleClick = () => {
   navigate(`/details/${id}`)
 }
-
   return (
     <Card sx={{ maxWidth: 345, backgroundColor: "white", mx:"auto", cursor:"pointer"}} onClick={handleClick}>
       <CardMedia
@@ -66,7 +65,7 @@ const handleClick = () => {
       </CardActions>
       <CardActions sx={{px:"0"}}>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon sx={{ color: "crimson"}}/>
         </IconButton>
         <Typography>56</Typography>
         <IconButton aria-label="comment">

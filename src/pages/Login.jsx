@@ -13,6 +13,9 @@ import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import { signIn, signUpProvider } from "../helpers/firebase";
+import { useNavigate } from "react-router-dom";
+
 
 const loginValidationSchema = Yup.object({
   email: Yup.string().email("Invalid Email").required("Email is required!"),
@@ -26,6 +29,7 @@ const loginValidationSchema = Yup.object({
 });
 const Login = () => {
   const [userInfo, setUserInfo] = useState({});
+  const navigate = useNavigate()
   const initialValues = {
     email: "",
     password: "",
@@ -36,16 +40,20 @@ const Login = () => {
       email: values.email,
       password: values.password,
     });
+    signIn(values.email, values.password, navigate)
     resetForm();
   };
-  console.log(userInfo);
 
+  
+  const handleProviderLogin = () => {
+    signUpProvider(navigate)
+  }
   return (
     <Box
       sx={{
-        backgroundImage: "url(https://picsum.photos/1600/900)",
+        backgroundImage: "url(https://picsum.photos/1300/800)",
         backgroundRepeate: "no-repeat",
-        pt: "2.5rem",
+        pt: "1.5rem",
         mt: "4rem",
         pb: "2rem",
       }}
@@ -54,18 +62,18 @@ const Login = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          p: "2.5rem",
+          p: "1.5rem 2.5rem 2.5rem",
           alignItems: "center",
           width: "27rem",
           mx: "auto",
-          bgcolor: "rgba(255,255,255, 0.5)",
+          bgcolor: "rgba(255,255,255, 0.7)",
           borderRadius: "7px",
         }}
       >
         <Card
           sx={{
-            width: "12rem",
-            height: "12rem",
+            width: "8rem",
+            height: "8rem",
             p: "1rem",
             backgroundColor: "#1976D2",
             borderRadius: "50%",
@@ -153,6 +161,7 @@ const Login = () => {
                         color: "#046582",
                       },
                     }}
+                    onClick={handleProviderLogin}
                   >
                     Continue with
                     <img
