@@ -1,4 +1,4 @@
-import { SET_POSTS_LIST, CLEAR_POSTS_LIST } from "../types/postsTypes";
+import { SET_POSTS_DATA, CLEAR_POSTS_DATA } from "../types/postsTypes";
 
 const initialState = {
     nextPage: null,
@@ -6,14 +6,15 @@ const initialState = {
     postsList: [],
   };
   
-  const newsReducer = (state = initialState, { type, payload }) => {
+  const postsReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-      case SET_POSTS_LIST:
-        return { ...state, newsList: payload };
-      case CLEAR_POSTS_LIST:
+      case SET_POSTS_DATA:
+        return { ...state, postsList: payload.postsList, nextPage: payload.nextPage,previousPage: payload.previousPage };
+      case CLEAR_POSTS_DATA:
         return initialState;
       default:
         return state;
     }
   };
-  export default newsReducer;
+
+  export default postsReducer;

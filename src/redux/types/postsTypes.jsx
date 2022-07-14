@@ -1,2 +1,2 @@
-export const SET_POSTS_LIST = "SET_POSTS_LIST";
-export const CLEAR_POSTS_LIST = "CLEAR_POSTS_LIST";
+export const SET_POSTS_DATA = "SET_POSTS_DATA";
+export const CLEAR_POSTS_DATA = "CLEAR_POSTS_DATA";

@@ -1,12 +1,12 @@
-import { SET_POSTS_LIST, CLEAR_POSTS_LIST } from "../types/postsTypes";
+import { SET_POSTS_DATA, CLEAR_POSTS_DATA } from "../types/postsTypes";
 
 
-export const setPostsList = (postsData) => ({
-    type: SET_NEWS_LIST,
+export const setPostsData = (postsData) => ({
+    type: SET_POSTS_DATA,
     payload: postsData,
   });
   
-  export const clearPostssList = () => ({
-    type: CLEAR_NEWS_LIST,
+  export const clearPostsData = () => ({
+    type: CLEAR_POSTS_DATA,
   });
   
