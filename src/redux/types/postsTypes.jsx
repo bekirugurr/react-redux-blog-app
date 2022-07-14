@@ -1,0 +1,2 @@
+export const SET_POSTS_LIST = "SET_POSTS_LIST";
+export const CLEAR_POSTS_LIST = "CLEAR_POSTS_LIST";

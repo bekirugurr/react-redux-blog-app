@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BlogCard from "../components/BlogCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
+import axios from 'axios';
+import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
+  const dispatch = useDispatch()
   const info = [
     {
       id:'1', 
@@ -57,11 +60,33 @@ const Dashboard = () => {
     },
   ];
 
+  const getPosts = () => {
+    axios.get('http://127.0.0.1:8000/post/post/')
+    .then(response => {
+      console.log(response.data);
+      const postsData = {
+        nextPage : response.data.next,
+        previousPage : response.data.previous,
+        postsList : response.data.results
+      }
+      console.log(postsData)
+      // dispatch(setCurrentUser(response.data))
+      // navigate('/')
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  useEffect(() => {
+    getPosts()
+  }, [])
+  
+
   return (
     <Container>
       <Typography
         variant="h3"
-        sx={{ fontFamily: "Girassol", mb: "1.5rem", mt:"5rem", color: "#04617D" }}
+        sx={{ fontFamily: "Girassol", mb: "1.5rem", mt:"1rem", color: "#04617D" }}
       >
         ──── Dashboard ────
       </Typography>
