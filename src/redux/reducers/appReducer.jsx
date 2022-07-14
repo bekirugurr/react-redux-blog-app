@@ -3,7 +3,7 @@ const initialState = {
     loading: false,
 }
 
-export default appReducer = (state = initialState, { type, payload }) => {
+const appReducer = (state = initialState, { type, payload }) => {
   switch (type) {
 
   case SET_LOADING:
@@ -16,3 +16,5 @@ export default appReducer = (state = initialState, { type, payload }) => {
     return state
   }
 }
+
+export default appReducer
