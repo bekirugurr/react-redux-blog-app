@@ -48,23 +48,14 @@ const Register = () => {
   };
 
 //! register func
-
-// const signUp = (data) => {
-// console.log("BUUURAAAAYAAAA BAAAAK --> 1111");
-// axios.post('http://127.0.0.1:8000/auth/register/', data)
-// .then(response => {
-//   console.log("BUUURAAAAYAAAA BAAAAK --> 2222");
-//   dispatch(setCurrentUser(response.data))
-//   navigate('/')
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
-// }
 const signUp = async(data) => {
-console.log("BUUURAAAAYAAAA BAAAAK --> 1111");
 try {
-  const res = await axios.post('http://127.0.0.1:8000/auth/register/', data)
+  let config = {
+    method: 'post',
+    url:'http://127.0.0.1:8000/auth/register/',
+    data: data
+  }
+  const res = await axios(config)
   let userData = {
     key : res.data.token,
     user : {
@@ -79,14 +70,12 @@ try {
 }}
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log("BUUURAAAAYAAAA BAAAAK --> 0000");
     let data = {
       username : values.userName,
       email: values.email,
       password: values.password,
       password2: values.password2
     } 
-    console.log("BUUURAAAAYAAAA BAAAAK --> 3333");
     signUp(data)
     resetForm();
   };

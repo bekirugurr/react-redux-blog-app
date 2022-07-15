@@ -10,10 +10,18 @@ import { setPostsData } from "../redux/actions/postsActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch()
+  const { key} = useSelector((state) => state.auth);
   const { postsList, previousPage, nextPage} = useSelector((state) => state.postData);
 
   const getPosts = () => {
-    axios.get('http://127.0.0.1:8000/post/post/')
+    let config = {
+      method : 'get',
+      url: 'http://127.0.0.1:8000/post/post/',
+      headers : {
+        Authorization : `Token ${key}`
+      }
+    }
+    axios(config)
     .then(response => {
       console.log(response.data);
       const postsData = {

@@ -68,17 +68,6 @@ const Navbar = () => {
 
   const classes = navbarMuiStyles();
 
-  const logIn = (data) => {
-    axios.post('http://127.0.0.1:8000/auth/login/', data)
-    .then(response => {
-      dispatch(clearCurrentUser)
-      navigate('/')
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-
   const logout = () => {
     console.log(key);
     let config = {

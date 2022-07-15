@@ -42,7 +42,12 @@ const Login = () => {
 
 //! log in function
 const logIn = (data) => {
-  axios.post('http://127.0.0.1:8000/auth/login/', data)
+  let config = {
+    method: 'post',
+    url: 'http://127.0.0.1:8000/auth/login/',
+    data: data
+  }
+  axios(config)
   .then(response => {
     dispatch(setCurrentUser(response.data))
     navigate('/')
