@@ -12,15 +12,10 @@ import formLogo from "../assets/formLogo.png";
 import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
-import { signIn, signUpProvider } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {  useDispatch } from "react-redux";
-import { setCurrentUser, clearCurrentUser } from "../redux/actions/authActions";
-
-
-
+import { setCurrentUser } from "../redux/actions/authActions";
 
 const loginValidationSchema = Yup.object({
   email: Yup.string().email("Invalid Email").required("Email is required!"),
@@ -67,7 +62,7 @@ const logIn = (data) => {
 
  
   const handleProviderLogin = () => {
-    signUpProvider(navigate)
+    
   }
   return (
     <Box
@@ -171,7 +166,7 @@ const logIn = (data) => {
                   <Button
                     variant="contained"
                     fullWidth
-                    type="submit"
+                    // type="submit"
                     sx={{
                       height: "2.5rem",
                       bgcolor: "white",

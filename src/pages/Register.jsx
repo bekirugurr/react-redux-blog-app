@@ -79,6 +79,9 @@ try {
     signUp(data)
     resetForm();
   };
+  const handleProviderSignUp = () => {
+    
+  }
 
   return (
     <Box
@@ -212,7 +215,7 @@ try {
                   <Button
                     variant="contained"
                     fullWidth
-                    type="submit"
+                    // type="submit"
                     sx={{
                       height: "2.5rem",
                       bgcolor: "white",
@@ -222,6 +225,8 @@ try {
                         color: "#046582",
                       },
                     }}
+                    onClick={handleProviderSignUp}
+
                   >
                     Continue with{" "}
                     <img

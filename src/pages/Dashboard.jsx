@@ -14,13 +14,17 @@ const Dashboard = () => {
   const { postsList, previousPage, nextPage} = useSelector((state) => state.postData);
 
   const getPosts = () => {
-    let config = {
+    let config = key ? {
       method : 'get',
       url: 'http://127.0.0.1:8000/post/post/',
       headers : {
         Authorization : `Token ${key}`
       }
+    } : {
+      method : 'get',
+      url: 'http://127.0.0.1:8000/post/post/',
     }
+
     axios(config)
     .then(response => {
       console.log(response.data);

@@ -8,15 +8,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Box, Button } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const Details = () => {
-  const img =
-    "https://www.alastyr.com/blog/wp-content/uploads/2021/04/Javascript-framework-nedir-768x323.jpg";
-  const header = "JavaScript";
-  const date = `${new Date()}`.slice(4, 15);
-  const text =
-    "JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions. JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions. JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions. JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions. ";
-  const email = "walter@clarusway.com";
+
+
+  const location = useLocation()
+  const post_url = location.state.post_detail
+
 
   return (
     <>

@@ -24,7 +24,7 @@ const Router = () => {
           <Route path={"/new-blog"} element={<NewBlog />} />
           <Route path={"/profile"} element={<Profile />} />
           <Route path={"/update-blog"} element={<UpdateBlog />} />
-          <Route path={"/details/:id"} element={<Details />} />
+          <Route path={"/details/:slug"} element={<Details />} />
         </Route>
       </Routes>
     </BrowserRouter>
