@@ -78,9 +78,9 @@ const Details = () => {
   console.log(postDetail);
 
   const handleLikeClick = () => {
-   setPostDetail({...postDetail, is_liked : !postDetail.is_liked})
-   let config;
-   if (postDetail.is_liked) {
+    setPostDetail({ ...postDetail, is_liked: !postDetail.is_liked });
+    let config;
+    if (postDetail.is_liked) {
       config = {
         method: "delete",
         url: `http://127.0.0.1:8000/post/like/${postDetail.like_id}`,
@@ -89,7 +89,6 @@ const Details = () => {
         },
       };
       console.log("BUUUURAAAAYAAA BAAAAK --> 4444");
-
     } else {
       config = {
         method: "post",
@@ -100,63 +99,125 @@ const Details = () => {
         },
         headers: {
           Authorization: `Token ${key}`,
-        }
-      }; 
+        },
+      };
     }
 
     axios(config)
-        .then((response) => {
-          console.log(response);
-          getPostDetail()
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .then((response) => {
+        console.log(response);
+        getPostDetail();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <>
       <Typography
-        variant="h3"
+        variant="h4"
         sx={{
           fontFamily: "Girassol",
           mb: "1.5rem",
           color: "#04617D",
-          mt: "5rem",
         }}
       >
         ──── Details ────
       </Typography>
       <Card
         sx={{
-          width: "75%",
+          width: "37rem",
           backgroundColor: "white",
           mx: "auto",
           mb: "2rem",
+          border: "1px solid #a2a4a556",
+          p: "1.5rem",
         }}
       >
         <CardMedia
           component="img"
           width="100%"
+          sx={{ maxHeight: "20rem", borderRadius: "5px" }}
           image={postDetail.post_pic}
           alt={postDetail.title}
         />
-        <CardContent sx={{ backgroundColor: "#efeefe" }}>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{ fontFamily: "Girassol", color: "#04617D", my: "1rem" }}
-          >
-            {postDetail.title}
-          </Typography>
-          <Typography
-            variant="body1"
-            gutterBottom
-            sx={{ color: "gray", fontFamily: "Roboto" }}
-          >
-            Posted {elapsedTime(postDetail.publish_date)} ago
-          </Typography>
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{
+            fontFamily: "Segoe UI",
+            textAlign: "start",
+            fontWeight: "600",
+            p: "0.8rem",
+            borderBottom: "1px solid #a2a4a556",
+          }}
+        >
+          {postDetail.title}
+        </Typography>
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderBottom: "1px solid #a2a4a556",
+            py: "0",
+          }}
+        >
+          <CardActions sx={{ p: "0" }}>
+            <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
+              <FavoriteIcon
+                sx={{ color: postDetail.is_liked ? "crimson" : "gray" }}
+              />
+            </IconButton>
+            <Typography>{postDetail.likes_count}</Typography>
+            <IconButton aria-label="comment">
+              <ChatBubbleOutlineIcon />
+            </IconButton>
+            <Typography>{postDetail.comments?.length}</Typography>
+            <IconButton aria-label="views_count">
+              <VisibilityIcon />
+            </IconButton>
+            <Typography>{postDetail.views_count}</Typography>
+          </CardActions>
+
+          <CardActions sx={{ py: "0" }}>
+            <CardActions
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+              }}
+            >
+              <Typography
+                variant="body1"
+                sx={{ fontFamily: "Roboto", fontSize: "1rem", pl: "1rem" }}
+              >
+                posted by <b>{postDetail.writer_name}</b>
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  fontFamily: "Roboto",
+                  fontSize: "1rem",
+                  mx: "0",
+                  pl: "0.5rem",
+                }}
+              >
+                <b>{elapsedTime(postDetail.publish_date)}</b> ago
+              </Typography>
+            </CardActions>
+            {postDetail.profile_pic ? (
+              <Avatar
+                alt="writer_avatar"
+                src={`http://127.0.0.1:8000/` + postDetail.profile_pic}
+                sx={{ height: "2.5rem", width: "2.5rem" }}
+              />
+            ) : (
+              <AccountCircleIcon />
+            )}
+          </CardActions>
+        </CardActions>
+        <CardContent>
           <Typography
             variant="body2"
             color="text.secondary"
@@ -169,39 +230,27 @@ const Details = () => {
             {postDetail.content}
           </Typography>
         </CardContent>
-        <CardActions>
-          {postDetail.profile_pic ? (
-            <Avatar
-              alt="writer_avatar"
-              src={`http://127.0.0.1:8000/` + postDetail.profile_pic}
-              sx={{ height: "2.5rem", width: "2.5rem" }}
-            />
-          ) : (
-            <AccountCircleIcon />
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{
+            fontFamily: "Segoe UI",
+            textAlign: "start",
+            fontWeight: "600",
+            p: " 0 0.6rem 0.6rem",
+            borderBottom: "1px solid #a2a4a556",
+          }}
+        >
+          Comments
+        </Typography>
+        {postDetail.comments?.map(comment => (
+        <CardActions sx={{ p: "0.7rem 0", borderBottom:'1px solid #a2a4a556', display:'flex', flexDirection:'column', alignItems:'start', gap:'0.5rem' }}>
+
+          <Typography sx={{fontSize:'0.7rem', pl:'0.5rem'}}> Comment by <b>{comment.commenter_name}</b> - <b>{elapsedTime(comment.date_stamp)}</b> ago</Typography>
+          <Typography sx={{fontSize:'1rem'}}>{comment.content}</Typography>
+        </CardActions>
+          )
           )}
-          <Typography
-            variant="body1"
-            sx={{ fontFamily: "Roboto", fontSize: "20px", px: "1rem" }}
-          >
-            {postDetail.writer_name}
-          </Typography>
-        </CardActions>
-        <CardActions sx={{ p: "0" }}>
-          <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
-            <FavoriteIcon
-              sx={{ color: postDetail.is_liked ? "crimson" : "gray" }}
-            />
-          </IconButton>
-          <Typography>{postDetail.likes_count}</Typography>
-          <IconButton aria-label="comment">
-            <ChatBubbleOutlineIcon />
-          </IconButton>
-          <Typography>{postDetail.comments?.length}</Typography>
-          <IconButton aria-label="views_count">
-            <VisibilityIcon />
-          </IconButton>
-          <Typography>{postDetail.views_count}</Typography>
-        </CardActions>
       </Card>
       {user.username == postDetail.writer_name && (
         <Box
