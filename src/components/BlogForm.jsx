@@ -36,7 +36,7 @@ const example = {
 
 const BlogForm = () => {
   return (
-    <Box component="form" autoComplete="off">
+    <Box component="form" autoComplete="off" >
       <TextField
         id="outlined-basic-title"
         label="Title"

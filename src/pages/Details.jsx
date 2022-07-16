@@ -19,6 +19,8 @@ import {
   determineCategoryColor,
   determinePostCategory,
 } from "../helpers/functions";
+import CommentForm from "../components/CommentForm";
+
 
 const Details = () => {
   const location = useLocation();
@@ -88,7 +90,6 @@ const Details = () => {
           Authorization: `Token ${key}`,
         },
       };
-      console.log("BUUUURAAAAYAAA BAAAAK --> 4444");
     } else {
       config = {
         method: "post",
@@ -186,6 +187,7 @@ const Details = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "start",
+                py:'0'
               }}
             >
               <Typography
@@ -230,8 +232,9 @@ const Details = () => {
             {postDetail.content}
           </Typography>
         </CardContent>
+        <CommentForm postId={postDetail.id} getPostDetail={getPostDetail}/>
         <Typography
-          variant="h4"
+          variant="h5"
           component="div"
           sx={{
             fontFamily: "Segoe UI",
@@ -244,7 +247,7 @@ const Details = () => {
           Comments
         </Typography>
         {postDetail.comments?.map(comment => (
-        <CardActions sx={{ p: "0.7rem 0", borderBottom:'1px solid #a2a4a556', display:'flex', flexDirection:'column', alignItems:'start', gap:'0.5rem' }}>
+        <CardActions key={comment.id} sx={{ p: "0.7rem 0", borderBottom:'1px solid #a2a4a556', display:'flex', flexDirection:'column', alignItems:'start', gap:'0.5rem' }}>
 
           <Typography sx={{fontSize:'0.7rem', pl:'0.5rem'}}> Comment by <b>{comment.commenter_name}</b> - <b>{elapsedTime(comment.date_stamp)}</b> ago</Typography>
           <Typography sx={{fontSize:'1rem'}}>{comment.content}</Typography>

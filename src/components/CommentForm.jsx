@@ -1,0 +1,87 @@
+import { useEffect, useState } from "react";
+import { Typography,  Box, TextField, Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
+const CommentForm = ({postId, getPostDetail}) => {
+  const { key, user } = useSelector((state) => state.auth);
+  const [commentContent, setCommentContent] = useState("");
+  const [refreshComp, setRefreshComp] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    let data={
+        content: commentContent,
+        commenter: user.id,
+        post: postId
+    }
+    console.log(data);
+    let config={
+        method: 'post',
+        url: 'http://127.0.0.1:8000/post/comment/',
+        data: data,
+        headers: {
+            Authorization: `Token ${key}`,
+          },
+    }
+    axios(config)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    setCommentContent('')
+    setRefreshComp(!refreshComp)
+  }
+  useEffect(() => {
+    getPostDetail()
+  }, [refreshComp])
+  
+  return (
+    <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
+      <Typography
+        variant="h5"
+        component="div"
+        sx={{
+          fontFamily: "Segoe UI",
+          textAlign: "start",
+          fontWeight: "600",
+          p: " 0 0.6rem 0.6rem",
+          borderBottom: "1px solid #a2a4a556",
+        }}
+      >
+        Leave a comment below
+      </Typography>
+      <TextField
+        id="outlined-basic-content"
+        label="Comment"
+        variant="outlined"
+        name="content"
+        required
+        multiline
+        minRows={5}
+        sx={{ m: "1rem", width: "32rem" }}
+        value={commentContent}
+        onChange={(e) => setCommentContent(e.target.value)}
+      />
+      <Button
+        variant="contained"
+        type="submit"
+        sx={{
+          ":hover": {
+            bgcolor: "#ffffff",
+            color: "dodgerBlue",
+            outline: "1px solid dodgerBlue",
+            m: "0",
+            boxShodow: "none",
+          },
+        }}
+      >
+        SUBMIT
+      </Button>
+    </Box>
+  );
+};
+
+export default CommentForm;
