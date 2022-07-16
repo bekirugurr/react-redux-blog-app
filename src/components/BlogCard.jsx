@@ -45,7 +45,7 @@ const BlogCard = ({
       toastErrorNotify('Login to get details')
       navigate('/login')
     }
-    navigate(`/details/${slug}`, {state: { post_detail }});
+    navigate(`/details/${slug}`, {state: { post_detail, id, is_viewed }});
   };
   return (
     <Card

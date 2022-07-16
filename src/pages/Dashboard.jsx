@@ -10,7 +10,7 @@ import { setPostsData } from "../redux/actions/postsActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const { key} = useSelector((state) => state.auth);
+  const { key } = useSelector((state) => state.auth);
   const { postsList, previousPage, nextPage} = useSelector((state) => state.postData);
 
   const getPosts = () => {
