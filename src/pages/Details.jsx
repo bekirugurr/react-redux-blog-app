@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import { Box, Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import {
   elapsedTime,
@@ -20,17 +20,22 @@ import {
   determinePostCategory,
 } from "../helpers/functions";
 import CommentForm from "../components/CommentForm";
+import { setLoading, clearLoading } from "../redux/actions/appActions";
+import loadingGif from '../assets/loading.gif'
 
 
 const Details = () => {
+  const dispatch = useDispatch()
   const location = useLocation();
   const post_url = location.state.post_detail;
   const postId = location.state.id;
   const postIsViewed = location.state.is_viewed;
   const [postDetail, setPostDetail] = useState({});
   const { key, user } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.app);
 
-  const getPostDetail = () => {
+
+  const getPostDetail = async() => {
     let config = {
       method: "get",
       url: post_url,
@@ -39,13 +44,15 @@ const Details = () => {
       },
     };
 
-    axios(config)
-      .then((response) => {
-        setPostDetail(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      dispatch(setLoading())
+      const { data } = await axios(config)
+      setPostDetail(data);
+      dispatch(clearLoading())
+    } catch (error) {
+      console.log(error);
+      dispatch(clearLoading())
+    }
   };
 
   const increaseViewsCount = () => {
@@ -116,6 +123,11 @@ const Details = () => {
 
   return (
     <>
+    {loading ? (
+            <CardMedia component="img" sx={{height:'7rem', width:'7rem', textAlign:'center', mx:'auto'}} image={ loadingGif } alt="loading" >
+            </CardMedia>
+    ):(
+      <>
       <Typography
         variant="h4"
         sx={{
@@ -291,6 +303,7 @@ const Details = () => {
           </Button>
         </Box>
       )}
+      </>)}
     </>
   );
 };

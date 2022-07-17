@@ -3,17 +3,20 @@ import BlogCard from "../components/BlogCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Typography } from "@mui/material";
+import { CardMedia, Typography } from "@mui/material";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { setPostsData } from "../redux/actions/postsActions";
+import { setLoading, clearLoading } from "../redux/actions/appActions";
+import loadingGif from '../assets/loading.gif'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
   const { key } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.app);
   const { postsList, previousPage, nextPage} = useSelector((state) => state.postData);
 
-  const getPosts = () => {
+  const getPosts = async() => {
     let config = key ? {
       method : 'get',
       url: 'http://127.0.0.1:8000/post/post/',
@@ -22,24 +25,26 @@ const Dashboard = () => {
       }
     } : {
       method : 'get',
-      url: 'http://127.0.0.1:8000/post/post/',
+      url: 'http://127.0.0.1:8000/post/post/'
     }
-
-    axios(config)
-    .then(response => {
-      console.log(response.data);
+    try {
+      dispatch(setLoading())
+      const { data } = await axios(config)
       const postsData = {
-        nextPage : response.data.next,
-        previousPage : response.data.previous,
-        postsList : response.data.results
+        nextPage : data.next,
+        previousPage : data.previous,
+        postsList : data.results
       }
       console.log(postsData)
       dispatch(setPostsData(postsData))
-    })
-    .catch((error) => {
+      dispatch(clearLoading())
+    } catch (error) {
       console.log(error);
-    });
+      dispatch(clearLoading())
+    }
+
   }
+
   useEffect(() => {
     getPosts()
   }, [])
@@ -53,6 +58,10 @@ const Dashboard = () => {
       >
         ──── Dashboard ────
       </Typography>
+      {loading ? (
+      <CardMedia component="img" sx={{height:'7rem', width:'7rem', textAlign:'center', mx:'auto'}} image={ loadingGif } alt="loading" >
+      </CardMedia>
+      ) : (
       <Grid
         container
         spacing={5}
@@ -66,6 +75,7 @@ const Dashboard = () => {
           )
         ))}
       </Grid>
+      )}
     </Container>
   );
 };
