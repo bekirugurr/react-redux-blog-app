@@ -34,7 +34,6 @@ const Details = () => {
   const { key, user } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.app);
 
-
   const getPostDetail = async() => {
     let config = {
       method: "get",
@@ -45,17 +44,12 @@ const Details = () => {
     };
 
     try {
-      dispatch(setLoading())
       const { data } = await axios(config)
       setPostDetail(data);
-      dispatch(clearLoading())
     } catch (error) {
       console.log(error);
-      dispatch(clearLoading())
     }
-  };
 
-  const increaseViewsCount = () => {
     if (!postIsViewed) {
       let data = {
         who_viewed: user.id,
@@ -80,10 +74,11 @@ const Details = () => {
     }
   };
 
+
   useEffect(() => {
     getPostDetail();
-    increaseViewsCount();
   }, []);
+
   console.log(postDetail);
 
   const handleLikeClick = () => {

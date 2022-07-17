@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Typography,  Box, TextField, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { toastSuccessNotify, toastErrorNotify } from "../helpers/toastNotify";
 
 const CommentForm = ({postId, getPostDetail}) => {
   const { key, user } = useSelector((state) => state.auth);
@@ -27,9 +28,11 @@ const CommentForm = ({postId, getPostDetail}) => {
     axios(config)
     .then((response) => {
       console.log(response.data);
+      toastSuccessNotify('Comment added succesfully')
     })
     .catch((error) => {
       console.log(error);
+      toastErrorNotify('Adding commenet failed')
     });
     setCommentContent('')
     setRefreshComp(!refreshComp)

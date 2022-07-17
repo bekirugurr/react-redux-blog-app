@@ -14,8 +14,11 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {  useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../redux/actions/authActions";
+import { setLoading, clearLoading } from "../redux/actions/appActions";
+import loadingGif from "../assets/loading.gif";
+import { toastSuccessNotify, toastErrorNotify } from "../helpers/toastNotify";
 
 const loginValidationSchema = Yup.object({
   email: Yup.string().email("Invalid Email").required("Email is required!"),
@@ -28,42 +31,46 @@ const loginValidationSchema = Yup.object({
     .matches(/[!?.@#$%^&*()-+]+/, "Password must have a special char!"),
 });
 const Login = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.app);
   const initialValues = {
     email: "",
     password: "",
   };
 
-//! log in function
-const logIn = (data) => {
-  let config = {
-    method: 'post',
-    url: 'http://127.0.0.1:8000/auth/login/',
-    data: data
-  }
-  axios(config)
-  .then(response => {
-    dispatch(setCurrentUser(response.data))
-    navigate('/')
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+  //! log in function
+  const logIn = (data) => {
+    let config = {
+      method: "post",
+      url: "http://127.0.0.1:8000/auth/login/",
+      data: data,
+    };
+    dispatch(setLoading());
+    axios(config)
+      .then((response) => {
+        dispatch(setCurrentUser(response.data));
+        dispatch(clearLoading());
+        navigate("/");
+        toastSuccessNotify("Logged in succesfully ");
+      })
+      .catch((error) => {
+        toastErrorNotify('Something is wrong. Try again!')
+        console.log(error);
+        dispatch(clearLoading());
+      });
+  };
+
   const handleSubmit = (values, { resetForm }) => {
     let data = {
-      email : values.email,
-      password : values.password
-    }
-    logIn(data)
+      email: values.email,
+      password: values.password,
+    };
+    logIn(data);
     resetForm();
   };
 
- 
-  const handleProviderLogin = () => {
-    
-  }
+  const handleProviderLogin = () => {};
   return (
     <Box
       sx={{
@@ -116,7 +123,14 @@ const logIn = (data) => {
           onSubmit={handleSubmit}
           validationSchema={loginValidationSchema}
         >
-          {({ values, handleChange, handleSubmit, errors, touched, handleBlur}) => (
+          {({
+            values,
+            handleChange,
+            handleSubmit,
+            errors,
+            touched,
+            handleBlur,
+          }) => (
             <form onSubmit={handleSubmit}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -127,88 +141,105 @@ const logIn = (data) => {
                     variant="outlined"
                     value={values.email}
                     onChange={handleChange}
-                    helperText={touched.email &&  errors.email}
-                    error={touched.email &&  Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                    error={touched.email && Boolean(errors.email)}
                     onBlur={handleBlur}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                     fullWidth
-                     name="password"
-                     label="Password"
-                     type="password"
-                     variant="outlined"
-                     value={values.password}
-                     onChange={handleChange}
-                     helperText={touched.password &&  errors.password}
-                     error={touched.password &&  Boolean(errors.password)}
-                     onBlur={handleBlur}
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    variant="outlined"
+                    value={values.password}
+                    onChange={handleChange}
+                    helperText={touched.password && errors.password}
+                    error={touched.password && Boolean(errors.password)}
+                    onBlur={handleBlur}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    type="submit"
+                {loading ? (
+                  <CardMedia
+                    component="img"
                     sx={{
-                      height: "2.5rem",
-                      ":hover": {
-                        bgcolor: "white",
-                        color: "#046582",
-                      },
+                      height: "5rem",
+                      width: "5rem",
+                      textAlign: "center",
+                      mx: "auto",
                     }}
-                  >
-                    LOGIN
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    // type="submit"
-                    sx={{
-                      height: "2.5rem",
-                      bgcolor: "white",
-                      color: "#046582",
-                      ":hover": {
-                        bgcolor: "#f0eded",
-                        color: "#046582",
-                      },
-                    }}
-                    onClick={handleProviderLogin}
-                  >
-                    Continue with
-                    <img
-                      src={googleLogo}
-                      alt="googleLogo"
-                      style={{ height: "2rem" }}
-                    />
-                  </Button>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{ display: "flex", justifyContent: "flex-end" }}
-                >
-                  <Typography sx={{ me: "3rem" }}>
-                    Don't you have an account?
-                  </Typography>
-                  <Link
-                    color={"primary"}
-                    sx={{
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                      px: "1rem",
-                      textDecoration: "none",
-                    }}
-                    href="/register"
-                  >
-                    Sign Up
-                  </Link>
-                </Grid>
+                    image={loadingGif}
+                    alt="loading"
+                  ></CardMedia>
+                ) : (
+                  <>
+                    <Grid item xs={12}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        type="submit"
+                        sx={{
+                          height: "2.5rem",
+                          ":hover": {
+                            bgcolor: "white",
+                            color: "#046582",
+                          },
+                        }}
+                      >
+                        LOGIN
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        // type="submit"
+                        sx={{
+                          height: "2.5rem",
+                          bgcolor: "white",
+                          color: "#046582",
+                          ":hover": {
+                            bgcolor: "#f0eded",
+                            color: "#046582",
+                          },
+                        }}
+                        onClick={handleProviderLogin}
+                      >
+                        Continue with
+                        <img
+                          src={googleLogo}
+                          alt="googleLogo"
+                          style={{ height: "2rem" }}
+                        />
+                      </Button>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ display: "flex", justifyContent: "flex-end" }}
+                    >
+                      <Typography sx={{ me: "3rem" }}>
+                        Don't you have an account?
+                      </Typography>
+                      <Link
+                        color={"primary"}
+                        sx={{
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          px: "1rem",
+                          textDecoration: "none",
+                        }}
+                        href="/register"
+                      >
+                        Sign Up
+                      </Link>
+                    </Grid>
+                  </>
+                )}
               </Grid>
-            </form>)}
+            </form>
+          )}
         </Formik>
       </Box>
     </Box>

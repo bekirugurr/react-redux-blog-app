@@ -13,10 +13,12 @@ import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector  } from "react-redux";
 import axios from "axios";
-import { setCurrentUser, clearCurrentUser } from "../redux/actions/authActions";
-
+import { setCurrentUser } from "../redux/actions/authActions";
+import { setLoading, clearLoading } from "../redux/actions/appActions";
+import loadingGif from "../assets/loading.gif";
+import { toastSuccessNotify, toastErrorNotify } from "../helpers/toastNotify";
 
 const signUpValidationSchema = Yup.object({
   userName: Yup.string()
@@ -40,6 +42,7 @@ const signUpValidationSchema = Yup.object({
 const Register = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.app);
   const initialValues = {
     userName: "",
     email: "",
@@ -50,6 +53,7 @@ const Register = () => {
 //! register func
 const signUp = async(data) => {
 try {
+  dispatch(setLoading());
   let config = {
     method: 'post',
     url:'http://127.0.0.1:8000/auth/register/',
@@ -64,9 +68,13 @@ try {
     }
   }
   dispatch(setCurrentUser(userData))
+  dispatch(clearLoading());
   navigate('/')
+  toastSuccessNotify("Signed up succesfully ");
 } catch (error) {
+  toastErrorNotify('Something is wrong. Try again!')
   console.log(error);
+  dispatch(clearLoading());
 }}
 
   const handleSubmit = (values, { resetForm }) => {
@@ -195,6 +203,21 @@ try {
                     />
                 </Grid>
 
+
+                {loading ? (
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      height: "5rem",
+                      width: "5rem",
+                      textAlign: "center",
+                      mx: "auto",
+                    }}
+                    image={loadingGif}
+                    alt="loading"
+                  ></CardMedia>
+                ) : (
+                  <>
                 <Grid item xs={12}>
                   <Button
                     variant="contained"
@@ -208,7 +231,7 @@ try {
                       },
                     }}
                   >
-                    REGISTER
+                    SIGN UP
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
@@ -257,6 +280,9 @@ try {
                     Login
                   </Link>
                 </Grid>
+
+                </>
+                )}
               </Grid>
             </form>
           )}
