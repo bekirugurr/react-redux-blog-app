@@ -39,7 +39,7 @@ const navbarMuiStyles = makeStyles({
     px: "1.2rem",
     fontSize: "1rem",
     position: "absolute",
-    right: "4.5rem",
+    right: "3rem",
     top: "1.1rem",
     fontFamily: "Roboto",
   },
@@ -107,6 +107,10 @@ const Navbar = () => {
   const handleLogOut = () => {
     handleCloseUserMenu()
     logout()
+  }
+  const handleClickProfile = () => {
+    handleCloseUserMenu()
+    navigate('/profile')
   }
 
   return (
@@ -188,7 +192,7 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem onClick={handleClickProfile}>
                 <Typography className={classes.menuItems}>
                   Profile
                 </Typography>
