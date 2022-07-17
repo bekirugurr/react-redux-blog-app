@@ -110,7 +110,7 @@ const Navbar = () => {
   }
 
   return (
-    <AppBar color="primary"  position="static" sx={{ height:"3.2rem", width:"100vw"}}>
+    <AppBar color="primary"  position="static" sx={{ height:"3.2rem"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters className={classes.toolbar} variant="dense">
           <Box

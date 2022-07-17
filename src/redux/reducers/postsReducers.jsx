@@ -1,4 +1,4 @@
-import { SET_POSTS_DATA, CLEAR_POSTS_DATA } from "../types/postsTypes";
+import { SET_POSTS_DATA, CLEAR_POSTS_DATA, EXPAND_POSTS_DATA } from "../types/postsTypes";
 
 const initialState = {
     nextPage: null,
@@ -10,6 +10,8 @@ const initialState = {
     switch (type) {
       case SET_POSTS_DATA:
         return { ...state, postsList: payload.postsList, nextPage: payload.nextPage,previousPage: payload.previousPage };
+      case EXPAND_POSTS_DATA:
+        return { ...state, postsList: [...state.postsList, ...payload.postsList], nextPage: payload.nextPage,previousPage: payload.previousPage };
       case CLEAR_POSTS_DATA:
         return initialState;
       default:
