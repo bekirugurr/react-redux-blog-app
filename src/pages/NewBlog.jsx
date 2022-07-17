@@ -10,17 +10,17 @@ const NewBlog = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        p: '1rem',
+        py: '1rem',
         alignItems: "center",
-        width:"30rem",
-        mt:"4rem"
+        width:"40rem",
+        mt:"1rem"
       }}
       
       >
       <Card
         sx={{
-          width: "12rem",
-          height: "12rem",
+          width: "8rem",
+          height: "8rem",
           p: "1rem",
           backgroundColor: "#1976D2",
           borderRadius: "50%",
@@ -40,7 +40,7 @@ const NewBlog = () => {
         variant="h4"
         sx={{ fontFamily: "Girassol", m: "1rem", color: "#04617D" }}
       >
-        ── New Blog ──
+        ── New Post ──
       </Typography>
     <BlogForm/>
     </Container>
