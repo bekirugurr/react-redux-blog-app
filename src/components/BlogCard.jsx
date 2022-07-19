@@ -16,6 +16,8 @@ import defaultPostPic from "../assets/defaultPostPic.png";
 import { elapsedTime, determineCategoryColor, determinePostCategory } from "../helpers/functions";
 import { useSelector } from "react-redux";
 import { toastErrorNotify } from "../helpers/toastNotify";
+import defaultAvatar from "../assets/avatar.png";
+
 
 
 const BlogCard = ({
@@ -54,14 +56,16 @@ const BlogCard = ({
         backgroundColor: "white",
         mx: "auto",
         cursor: "pointer",
+        p:'1rem 1rem 0',
+        border: '1px solid #968c8c83',
         ':hover': {
           boxShadow: "8px 8px 8px 3px #968c8c"
         }
       }}
       onClick={openDetails}
     >
-      <CardMedia component="img" height="140" image={ post_pic || defaultPostPic } alt={title} />
-      <CardContent sx={{ backgroundColor: "#efeefe" }}>
+      <CardMedia component="img" height="190" image={ post_pic || defaultPostPic } alt={title} sx={{borderRadius:'5px', border:"1px solid #968c8c83"}}/>
+      <CardContent sx={{borderBottom:'1px solid #968c8c83'}}>
         <Typography
           variant="body1"
           component="div"
@@ -70,7 +74,7 @@ const BlogCard = ({
           {title} 
           
         </Typography>
-        <Box sx={{display:'flex', justifyContent:'space-between', pr:'0.8rem'}}>
+        
         <Typography
           variant="body1"
           gutterBottom
@@ -79,15 +83,7 @@ const BlogCard = ({
           {determinePostCategory(category)}
 
         </Typography>
-        <Typography
-          variant="body2"
-          gutterBottom
-          sx={{ color: "gray", fontFamily: "Roboto", display:'flex', justifyContent:'start',  fontSize: "0.8rem" }}
-        >
-          {elapsedTime(publish_date)} ago
-
-        </Typography>
-        </Box>
+      
         <Typography
           variant="body2"
           color="text.secondary"
@@ -102,42 +98,73 @@ const BlogCard = ({
           {content}
         </Typography>
       </CardContent>
-      <CardActions sx={{display:"flex", justifyContent:"flex-end", pr:'2rem', py:"0"}}>
+      <CardActions sx={{display:"flex", justifyContent:"flex-start", pl:'1rem', py:"0"}}>
+      {profile_pic ? (
+          <Avatar
+            alt="writer_avatar"
+            src={`http://127.0.0.1:8000/` + profile_pic }
+            sx={{ height: "2.5rem", width: "2.5rem", border: '1px solid gray' }}
+          />
+        ) : (
+          <AccountCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }}/>
+        )}
+
+<CardActions sx={{display:"flex", flexDirection:'column', pl:"0"}}>
+        <CardActions sx={{display:"flex", justifyContent:"flex-start", pr:'2rem', py:"0", pl:"0"}}>
+
+
         <Typography
           variant="body2"
           sx={{
             fontFamily: "Roboto",
             fontSize: "0.75rem",
-            pl: "0.7rem",
+            pl: "0",
             pt: "0.2rem",
             display: "flex",
           }}
         >
-          by
+          posted by
         </Typography>
         <Typography
           variant="body2"
           sx={{
             fontFamily: "Roboto",
             fontSize: "1.1rem",
-            pr: "1.5rem",
             display: "flex",
           }}
         >
           {writer_name}
         </Typography>
-        {profile_pic ? (
-          <Avatar
-            alt="writer_avatar"
-            src={`http://127.0.0.1:8000/` + profile_pic}
-            sx={{ height: "2.5rem", width: "2.5rem" }}
-          />
-        ) : (
-          <AccountCircleIcon />
-        )}
+
 
       </CardActions>
-      <CardActions sx={{ p: "0"}}>
+      <CardActions sx={{display:"flex", justifyContent:"flex-start", pr:'4rem', py:"0", pl:"0"}}>
+
+      <Typography
+          variant="body2"
+          sx={{
+            fontFamily: "Roboto",
+            fontSize: "1.1rem",
+            display: "flex",
+          }}
+        >
+          {elapsedTime(publish_date)}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            fontFamily: "Roboto",
+            fontSize: "0.75rem",
+            pt: "0.2rem",
+            display: "flex",
+          }}
+        >
+          ago
+        </Typography>
+      </CardActions>
+</CardActions>
+      </CardActions>
+      <CardActions sx={{ p: "0.5rem 0", borderTop:"1px solid #968c8c83"}}>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon sx={{ color: is_liked ? "crimson" : "gray" }} />
         </IconButton>
