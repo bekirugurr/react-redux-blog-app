@@ -102,7 +102,7 @@ const BlogCard = ({
       {profile_pic ? (
           <Avatar
             alt="writer_avatar"
-            src={`http://127.0.0.1:8000/` + profile_pic }
+            src={ profile_pic }
             sx={{ height: "2.5rem", width: "2.5rem", border: '1px solid gray' }}
           />
         ) : (

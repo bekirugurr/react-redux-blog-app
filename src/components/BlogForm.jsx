@@ -1,12 +1,12 @@
 import {
   Box,
   TextField,
-  InputLabel ,
+  InputLabel,
   MenuItem,
   Typography,
   Button,
-  FormControl ,
-  Select 
+  FormControl,
+  Select,
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
@@ -15,46 +15,76 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toastErrorNotify, toastSuccessNotify } from "../helpers/toastNotify";
 
-
-const BlogForm = () => {
-  const {key, user} = useSelector((state) => state.auth);
-  const navigate = useNavigate()
+const BlogForm = ({ postData }) => {
+  const { key, user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   let initialPostInfo = {
-    title: '',
-    post_pic:'',
-    content: '',
-    status: 'P',
+    title: "",
+    post_pic: "",
+    content: "",
+    status: "P",
     category: 4,
-    writer: user.id
-  }
-  const [postInfo, setPostInfo] = useState(initialPostInfo)
+    writer: user.id,
+  };
+  const [postInfo, setPostInfo] = useState(postData || initialPostInfo);
 
+  console.log(postInfo);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (postData) {
+      let config = {
+        method: "patch",
+        url: `https://blogapp-react-redux.herokuapp.com/post/post/${postData.id}/`,
+        data: {
+          title: postInfo.title,
+          content: postInfo.content,
+          post_pic: postInfo.post_pic,
+          status: postInfo.status,
+          writer: postInfo.writer,
+          category: postInfo.category,
+          id: postInfo.id,
+        },
+        headers: {
+          Authorization: `Token ${key}`,
+          "Content-Type": "multipart/form-data",
 
-  const handleSubmit = async(e) => {
-    e.preventDefault()
-    let config = {
-      method: "post",
-      url: `https://blogapp-react-redux.herokuapp.com/post/post/`,
-      data: postInfo,
-      headers: {
-        Authorization: `Token ${key}`,
-        "Content-Type" : 'multipart/form-data'
-      },
-    }
-    try {
-      const response = await axios(config);
-      console.log(response)
-      toastSuccessNotify('New post added succesfully')
-      setPostInfo(initialPostInfo)
-      navigate('/')
-    } catch (error) {
+        },
+      };
+      console.log(config.data)
+      try {
+        const response = await axios(config);
+        console.log(response);
+        toastSuccessNotify("Post updated succesfully");
+        navigate('/')
+      } catch (error) {
         console.log(error);
-        toastErrorNotify('New post addition failed')
-    } 
-  }
+        toastErrorNotify("Post updation failed");
+      }
+    } else {
+      let config = {
+        method: "post",
+        url: `https://blogapp-react-redux.herokuapp.com/post/post/`,
+        data: postInfo,
+        headers: {
+          Authorization: `Token ${key}`,
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      try {
+        const response = await axios(config);
+        console.log(response);
+        toastSuccessNotify("New post added succesfully");
+        setPostInfo(initialPostInfo);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+        toastErrorNotify("New post addition failed");
+      }
+    }
+  };
 
   return (
-    <Box component="form" autoComplete="off"  onSubmit={handleSubmit}>
+    <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
       <TextField
         id="outlined-basic-title"
         label="Title"
@@ -72,12 +102,11 @@ const BlogForm = () => {
         variant="outlined"
         name="post_pic"
         fullWidth
-        required
         value={postInfo.post_pic}
         onChange={(e) => setPostInfo({ ...postInfo, post_pic: e.target.value })}
         sx={{ mb: "1rem" }}
       />
-      
+
       <TextField
         id="outlined-basic-content"
         label="Content"
@@ -90,55 +119,56 @@ const BlogForm = () => {
         sx={{ mb: "1rem" }}
         value={postInfo.content}
         onChange={(e) => setPostInfo({ ...postInfo, content: e.target.value })}
-
       />
-      <Box sx={{ minWidth: 120, mb: "1rem", display:'flex', gap:"2rem" }}>
-        
-      <FormControl required  fullWidth>
-        <InputLabel id="status-select-label">Status</InputLabel>
-        <Select
-          labelId="status-select-label"
-          id="status-select"
-          value="P"
-          label="Status"
-          value={postInfo.status}
-          onChange={(e) => setPostInfo({ ...postInfo, status: e.target.value })}
+      <Box sx={{ minWidth: 120, mb: "1rem", display: "flex", gap: "2rem" }}>
+        <FormControl required fullWidth>
+          <InputLabel id="status-select-label">Status</InputLabel>
+          <Select
+            labelId="status-select-label"
+            id="status-select"
+            value="P"
+            label="Status"
+            value={postInfo.status}
+            onChange={(e) =>
+              setPostInfo({ ...postInfo, status: e.target.value })
+            }
           >
-          <MenuItem value={"P"}>Publish</MenuItem>
-          <MenuItem value={'D'}>Draft</MenuItem>
-        </Select>
-      </FormControl>
+            <MenuItem value={"P"}>Publish</MenuItem>
+            <MenuItem value={"D"}>Draft</MenuItem>
+          </Select>
+        </FormControl>
 
-      <FormControl required  fullWidth>
-        <InputLabel id="category-select-label">Category</InputLabel>
-        <Select
-          labelId="category-select-label"
-          id="category-select"
-          value={4}
-          label="Category"
-          value={postInfo.category}
-          onChange={(e) => setPostInfo({ ...postInfo, category: e.target.value })}
+        <FormControl required fullWidth>
+          <InputLabel id="category-select-label">Category</InputLabel>
+          <Select
+            labelId="category-select-label"
+            id="category-select"
+            value={4}
+            label="Category"
+            value={postInfo.category}
+            onChange={(e) =>
+              setPostInfo({ ...postInfo, category: e.target.value })
+            }
           >
-          <MenuItem value={1}>Software</MenuItem>
-          <MenuItem value={2}>Book</MenuItem>
-          <MenuItem value={3}>Movie</MenuItem>
-          <MenuItem value={4}>Life</MenuItem>
-          <MenuItem value={5}>Personal</MenuItem>
-        </Select>
-      </FormControl>
-
-    </Box>
+            <MenuItem value={1}>Software</MenuItem>
+            <MenuItem value={2}>Book</MenuItem>
+            <MenuItem value={3}>Movie</MenuItem>
+            <MenuItem value={4}>Life</MenuItem>
+            <MenuItem value={5}>Personal</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
 
       <Button
         variant="contained"
         fullWidth
         type="submit"
         sx={{
-          mb:"5rem",
+          mb: "5rem",
           ":hover": {
-            bgcolor: "#ffffff", 
+            bgcolor: "#ffffff",
             color: "dodgerBlue",
-            outline:'1px solid dodgerBlue'
+            outline: "1px solid dodgerBlue",
           },
         }}
       >

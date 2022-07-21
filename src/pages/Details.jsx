@@ -30,6 +30,7 @@ const Details = () => {
   const postId = location.state.id;
   const postIsViewed = location.state.is_viewed;
   const [postDetail, setPostDetail] = useState({});
+  const [isDeleteDivOpen, setIsDeleteDivOpen] = useState(false);
   const { key, user } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.app);
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ const Details = () => {
       });
   };
 
-const handleDeleteClick = (params) => {
+const handleDeleteClick = () => {
   let config = {
     method: "delete",
     url: `https://blogapp-react-redux.herokuapp.com/post/post/${postDetail.id}`,
@@ -137,6 +138,23 @@ const handleDeleteClick = (params) => {
 }
 
   return (
+    <>
+    {isDeleteDivOpen ? (
+      <Card sx={{ maxWidth: 450, mt:'2rem', border:'1px solid dodgerBlue', borderRadius:'10px', mx:"auto", py:"1rem"  }}>
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="div">
+          Are you sure?
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Do you want to delete the post permanantly?
+        </Typography>
+      </CardContent>
+      <CardActions sx={{display:'flex', justifyContent:'center', gap:"3rem"}}>
+        <Button variant="contained" size="small" color='error' onClick={handleDeleteClick}>Delete</Button>
+        <Button variant="contained" size="small" onClick={()=>setIsDeleteDivOpen(false)}>Cancel</Button>
+      </CardActions>
+    </Card>
+    ):(
     <>
       {loading ? (
         <CardMedia
@@ -250,7 +268,7 @@ const handleDeleteClick = (params) => {
                 {postDetail.profile_pic ? (
                   <Avatar
                     alt="writer_avatar"
-                    src={`http://127.0.0.1:8000/` + postDetail.profile_pic}
+                    src={postDetail.profile_pic}
                     sx={{ height: "2.5rem", width: "2.5rem" }}
                   />
                 ) : (
@@ -310,14 +328,15 @@ const handleDeleteClick = (params) => {
 
           {isOwnPost && (
             <CardActions sx={{display:'flex', justifyContent:'space-evenly', py:'1rem'}}>
-              <Button variant='contained'>UPDATE</Button>
-              <Button variant='contained'  onClick={handleDeleteClick}>DELETE</Button>
+              <Button variant='contained' onClick={()=> navigate('/update-blog', {state: { postDetail }} )}>UPDATE</Button>
+              <Button variant='contained'  onClick={()=>setIsDeleteDivOpen(true)}>DELETE</Button>
             </CardActions>
           )}
           </Card>
           
         </>
       )}
+      </>    )}
     </>
   );
 };

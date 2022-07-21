@@ -162,8 +162,7 @@ const ProfileForm = () => {
         variant="outlined"
         name="profile_pic"
         fullWidth
-        required
-        value={postInfo.profile_pic}
+        value={profileInfo.profile_pic}
         onChange={(e) => setProfileInfo({ ...profileInfo, profile_pic: e.target.value })}
         sx={{ mb: "1rem" }}
       />

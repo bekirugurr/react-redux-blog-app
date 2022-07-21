@@ -2,8 +2,12 @@ import React from "react";
 import BlogForm from '../components/BlogForm'
 import formLogo from "../assets/formLogo.png";
 import { Box, Button, Card, CardMedia, Container, Typography } from '@mui/material';
+import { useLocation } from "react-router-dom";
 
 const UpdateBlog = () => {
+  const location = useLocation();
+  const postData = location.state.postDetail;
+  console.log(postMessage)
   return (
     <Container
       sx={{
@@ -17,8 +21,8 @@ const UpdateBlog = () => {
     >
       <Card
         sx={{
-          width: "12rem",
-          height: "12rem",
+          width: "8rem",
+          height: "8rem",
           p: "1rem",
           backgroundColor: "#1976D2",
           borderRadius: "50%",
@@ -40,7 +44,7 @@ const UpdateBlog = () => {
       >
         ── Update Blog ──
       </Typography>
-      <BlogForm />
+      <BlogForm postData={postData}/>
       
     </Container>
   );
