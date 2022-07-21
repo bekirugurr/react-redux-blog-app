@@ -109,8 +109,8 @@ const BlogCard = ({
           <AccountCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }}/>
         )}
 
-<CardActions sx={{display:"flex", flexDirection:'column', pl:"0"}}>
-        <CardActions sx={{display:"flex", justifyContent:"flex-start", pr:'2rem', py:"0", pl:"0"}}>
+<CardActions sx={{display:"flex", flexDirection:'column', alignItems:'start', pl:"0"}}>
+        <CardActions sx={{display:"flex", justifyContent:"flex-start", pr:'2rem', py:"0"}}>
 
 
         <Typography
@@ -118,7 +118,6 @@ const BlogCard = ({
           sx={{
             fontFamily: "Roboto",
             fontSize: "0.75rem",
-            pl: "0",
             pt: "0.2rem",
             display: "flex",
           }}
@@ -138,7 +137,7 @@ const BlogCard = ({
 
 
       </CardActions>
-      <CardActions sx={{display:"flex", justifyContent:"flex-start", pr:'4rem', py:"0", pl:"0"}}>
+      <CardActions sx={{display:"flex", justifyContent:"flex-start", py:"0", pl:"0"}}>
 
       <Typography
           variant="body2"

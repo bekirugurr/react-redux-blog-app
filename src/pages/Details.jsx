@@ -58,7 +58,7 @@ const Details = () => {
       };
       let config = {
         method: "post",
-        url: "http://127.0.0.1:8000/post/view/",
+        url: "https://blogapp-react-redux.herokuapp.com/post/view/",
         data: data,
         headers: {
           Authorization: `Token ${key}`,
@@ -86,7 +86,7 @@ const Details = () => {
     if (postDetail.is_liked) {
       config = {
         method: "delete",
-        url: `http://127.0.0.1:8000/post/like/${postDetail.like_id}`,
+        url: `https://blogapp-react-redux.herokuapp.com/post/like/${postDetail.like_id}`,
         headers: {
           Authorization: `Token ${key}`,
         },
@@ -94,7 +94,7 @@ const Details = () => {
     } else {
       config = {
         method: "post",
-        url: `http://127.0.0.1:8000/post/like/`,
+        url: `https://blogapp-react-redux.herokuapp.com/post/like/`,
         data: {
           post: postDetail.id,
           who_liked: user.id,
@@ -118,7 +118,7 @@ const Details = () => {
 const handleDeleteClick = (params) => {
   let config = {
     method: "delete",
-    url: `http://127.0.0.1:8000/post/post/${postDetail.id}`,
+    url: `https://blogapp-react-redux.herokuapp.com/post/post/${postDetail.id}`,
     data: {
       post: postDetail.id,
     },

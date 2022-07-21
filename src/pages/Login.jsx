@@ -43,13 +43,15 @@ const Login = () => {
   const logIn = (data) => {
     let config = {
       method: "post",
-      url: "http://127.0.0.1:8000/auth/login/",
+      url: "https://blogapp-react-redux.herokuapp.com/auth/login/",
       data: data,
     };
     dispatch(setLoading());
     axios(config)
       .then((response) => {
+        console.log(response.data);
         dispatch(setCurrentUser(response.data));
+        localStorage.setItem("userInfo", JSON.stringify(response.data));
         dispatch(clearLoading());
         navigate("/");
         toastSuccessNotify("Logged in succesfully ");

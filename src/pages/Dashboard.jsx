@@ -22,14 +22,14 @@ const Dashboard = () => {
     let config = key
       ? {
           method: "get",
-          url: "http://127.0.0.1:8000/post/post/",
+          url: "https://blogapp-react-redux.herokuapp.com/post/post/",
           headers: {
             Authorization: `Token ${key}`,
           },
         }
       : {
           method: "get",
-          url: "http://127.0.0.1:8000/post/post/",
+          url: "https://blogapp-react-redux.herokuapp.com/post/post/",
         };
     try {
       dispatch(setLoading());

@@ -69,10 +69,10 @@ const Navbar = () => {
   const classes = navbarMuiStyles();
 
   const logout = () => {
-    console.log(key);
+    localStorage.removeItem("userInfo")
     let config = {
       method : 'post',
-      url : "http://127.0.0.1:8000/auth/logout/",
+      url : "https://blogapp-react-redux.herokuapp.com/auth/logout/",
       headers : {
         Authorization : `Token ${key}`
       }

@@ -31,7 +31,7 @@ const ProfileForm = () => {
   const fetchUserInfo = () => {
     let config = {
       method: "get",
-      url: `http://127.0.0.1:8000/auth/user/${user.id}/`,
+      url: `https://blogapp-react-redux.herokuapp.com/auth/user/${user.id}/`,
     };
     axios(config)
       .then((response) => {    
@@ -48,7 +48,7 @@ const ProfileForm = () => {
     let isProfileUpdateOk= true
     let userConfig = {
       method: "patch",
-      url: `http://127.0.0.1:8000/auth/user/${user.id}/`,
+      url: `https://blogapp-react-redux.herokuapp.com/auth/user/${user.id}/`,
       data: userInfo,
       headers: {
         Authorization: `Token ${key}`,
@@ -67,7 +67,7 @@ const ProfileForm = () => {
     let profileConfig = user.profile
       ? {
           method: "patch",
-          url: `http://127.0.0.1:8000/auth/profile/${user.profile.id}/`,
+          url: `https://blogapp-react-redux.herokuapp.com/auth/profile/${user.profile.id}/`,
           data: profileInfo,
           headers: {
             Authorization: `Token ${key}`,
@@ -76,7 +76,7 @@ const ProfileForm = () => {
         }
       : {
           method: "post",
-          url: `http://127.0.0.1:8000/auth/profile/`,
+          url: `https://blogapp-react-redux.herokuapp.com/auth/profile/`,
           data: profileInfo,
           headers: {
             Authorization: `Token ${key}`,

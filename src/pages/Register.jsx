@@ -56,7 +56,7 @@ try {
   dispatch(setLoading());
   let config = {
     method: 'post',
-    url:'http://127.0.0.1:8000/auth/register/',
+    url:'https://blogapp-react-redux.herokuapp.com/auth/register/',
     data: data
   }
   const res = await axios(config)
@@ -68,6 +68,7 @@ try {
     }
   }
   dispatch(setCurrentUser(userData))
+  localStorage.setItem("userInfo", JSON.stringify(userData));
   dispatch(clearLoading());
   navigate('/')
   toastSuccessNotify("Signed up succesfully ");

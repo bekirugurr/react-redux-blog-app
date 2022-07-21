@@ -19,7 +19,7 @@ const CommentForm = ({postId, getPostDetail}) => {
     console.log(data);
     let config={
         method: 'post',
-        url: 'http://127.0.0.1:8000/post/comment/',
+        url: 'https://blogapp-react-redux.herokuapp.com/post/comment/',
         data: data,
         headers: {
             Authorization: `Token ${key}`,

@@ -33,7 +33,7 @@ const BlogForm = () => {
     e.preventDefault()
     let config = {
       method: "post",
-      url: `http://127.0.0.1:8000/post/post/`,
+      url: `https://blogapp-react-redux.herokuapp.com/post/post/`,
       data: postInfo,
       headers: {
         Authorization: `Token ${key}`,
