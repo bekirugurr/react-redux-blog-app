@@ -21,6 +21,7 @@ const BlogForm = () => {
   const navigate = useNavigate()
   let initialPostInfo = {
     title: '',
+    post_pic:'',
     content: '',
     status: 'P',
     category: 4,
@@ -65,23 +66,17 @@ const BlogForm = () => {
         onChange={(e) => setPostInfo({ ...postInfo, title: e.target.value })}
         sx={{ mb: "1rem" }}
       />
-        <Button
+      <TextField
+        id="outlined-basic-post-pic"
+        label="Post Image Link"
         variant="outlined"
-        component="label"
+        name="post_pic"
         fullWidth
-        size="large"
-        onChange={(e) => setPostInfo({ ...postInfo, post_pic: e.target.files[0] })}
-        sx={{ 
-          mb: "1rem", 
-            ":hover": {
-              bgcolor: "dodgerBlue", 
-              color: "#ffffff",
-            },
-        }}       
-      >
-         Add Post Picture
-        <input hidden accept="image/*" type="file" />
-      </Button> 
+        required
+        value={postInfo.post_pic}
+        onChange={(e) => setPostInfo({ ...postInfo, post_pic: e.target.value })}
+        sx={{ mb: "1rem" }}
+      />
       
       <TextField
         id="outlined-basic-content"

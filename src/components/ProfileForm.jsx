@@ -155,17 +155,18 @@ const ProfileForm = () => {
         fullWidth
         sx={{ mb: "1rem" }}
       />
-     
-      <Button
+
+      <TextField
+        id="outlined-basic-profile-pic"
+        label="Profile Image Link"
         variant="outlined"
-        component="label"
+        name="profile_pic"
         fullWidth
-        sx={{ mb: "1rem" }}       
-        onChange={(e) => setProfileInfo({ ...profileInfo, profile_pic: e.target.files[0] })}
-      >
-        {user.profile ? "Change" : "Upload"} Profile Photo
-        <input hidden accept="image/*" type="file" />
-      </Button> 
+        required
+        value={postInfo.profile_pic}
+        onChange={(e) => setProfileInfo({ ...profileInfo, profile_pic: e.target.value })}
+        sx={{ mb: "1rem" }}
+      />
 
       <TextField
         id="outlined-basic-profile-bio"
