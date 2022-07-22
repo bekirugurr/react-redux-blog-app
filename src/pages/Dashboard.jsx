@@ -82,7 +82,7 @@ console.log(postsList);
   return (
     <Container>
       <Typography
-        variant="h3"
+        variant="h4"
         sx={{
           fontFamily: "Girassol",
           mb: "1.5rem",

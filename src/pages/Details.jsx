@@ -21,6 +21,10 @@ import {
 } from "../helpers/functions";
 import CommentForm from "../components/CommentForm";
 import loadingGif from "../assets/loading.gif";
+import defaultPostPic from "../assets/defaultPostPic.png";
+import PersonIcon from "@mui/icons-material/Person";
+
+
 
 const Details = () => {
   const dispatch = useDispatch();
@@ -202,7 +206,7 @@ const handleDeleteClick = () => {
               component="img"
               width="100%"
               sx={{ maxHeight: "20rem", borderRadius: "5px" }}
-              image={postDetail.post_pic}
+              image={postDetail.post_pic || defaultPostPic}
               alt={postDetail.title}
             />
             <Typography

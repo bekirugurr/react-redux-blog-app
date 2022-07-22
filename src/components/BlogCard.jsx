@@ -98,7 +98,7 @@ const BlogCard = ({
           {content}
         </Typography>
       </CardContent>
-      <CardActions sx={{display:"flex", justifyContent:"flex-start", pl:'1rem', py:"0"}}>
+      <CardActions sx={{display:"flex", justifyContent:"flex-start", pl:'0.5rem', py:"0"}}>
       {profile_pic ? (
           <Avatar
             alt="writer_avatar"
