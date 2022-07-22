@@ -64,7 +64,8 @@ try {
     key : res.data.token,
     user : {
       username : res.data.username,
-      email : res.data.email
+      email : res.data.email,
+      id : res.data.id
     }
   }
   dispatch(setCurrentUser(userData))

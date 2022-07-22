@@ -28,7 +28,6 @@ const BlogForm = ({ postData }) => {
   };
   const [postInfo, setPostInfo] = useState(postData || initialPostInfo);
 
-  console.log(postInfo);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (postData) {
@@ -70,6 +69,8 @@ const BlogForm = ({ postData }) => {
           "Content-Type": "multipart/form-data",
         },
       };
+      console.log(config)
+      console.log(postInfo)
       try {
         const response = await axios(config);
         console.log(response);

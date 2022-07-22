@@ -20,7 +20,6 @@ import {
   determinePostCategory,
 } from "../helpers/functions";
 import CommentForm from "../components/CommentForm";
-import { setLoading, clearLoading } from "../redux/actions/appActions";
 import loadingGif from "../assets/loading.gif";
 
 const Details = () => {
@@ -28,7 +27,7 @@ const Details = () => {
   const location = useLocation();
   const post_url = location.state.post_detail;
   const postId = location.state.id;
-  const postIsViewed = location.state.is_viewed;
+  const [postIsViewed, setPostIsViewed] = useState(location.state.is_viewed);
   const [postDetail, setPostDetail] = useState({});
   const [isDeleteDivOpen, setIsDeleteDivOpen] = useState(false);
   const { key, user } = useSelector((state) => state.auth);
@@ -53,6 +52,7 @@ const Details = () => {
     }
 
     if (!postIsViewed) {
+      setPostIsViewed(true)
       let data = {
         who_viewed: user.id,
         post: postId,
@@ -65,7 +65,7 @@ const Details = () => {
           Authorization: `Token ${key}`,
         },
       };
-
+      
       axios(config)
         .then((response) => {
           console.log(response);
@@ -109,11 +109,11 @@ const Details = () => {
     axios(config)
       .then((response) => {
         console.log(response);
-        getPostDetail();
       })
       .catch((error) => {
         console.log(error);
       });
+      getPostDetail();
   };
 
 const handleDeleteClick = () => {

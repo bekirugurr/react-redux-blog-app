@@ -32,11 +32,12 @@ const CommentForm = ({postId, getPostDetail}) => {
     })
     .catch((error) => {
       console.log(error);
-      toastErrorNotify('Adding commenet failed')
+      toastErrorNotify('Adding comment failed')
     });
     setCommentContent('')
     setRefreshComp(!refreshComp)
   }
+  
   useEffect(() => {
     getPostDetail()
   }, [refreshComp])
