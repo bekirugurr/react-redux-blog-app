@@ -63,7 +63,7 @@ const Details = () => {
   }
   
 
-  const getPostDetail = async () => {
+  const getPostDetail = async (post_url) => {
     let config = {
       method: "get",
       url: post_url,
@@ -81,7 +81,7 @@ const Details = () => {
   };
 
   useEffect(() => {
-    getPostDetail();
+    getPostDetail(post_url);
     handleView()
   }, []);
 
@@ -115,7 +115,7 @@ const Details = () => {
     axios(config)
       .then((response) => {
         console.log(response);
-        getPostDetail();
+        getPostDetail(post_url);
       })
       .catch((error) => {
         console.log(error);
@@ -297,7 +297,7 @@ const handleDeleteClick = () => {
                 {postDetail.content}
               </Typography>
             </CardContent>
-            <CommentForm postId={postDetail.id} getPostDetail={getPostDetail} />
+            <CommentForm id={postDetail.id} getPostDetail={getPostDetail} post_detail={postDetail.post_detail} />
             <Typography
               variant="h5"
               component="div"

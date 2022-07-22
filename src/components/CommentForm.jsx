@@ -4,17 +4,16 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { toastSuccessNotify, toastErrorNotify } from "../helpers/toastNotify";
 
-const CommentForm = ({postId, getPostDetail}) => {
+const CommentForm = ({id, getPostDetail, post_detail}) => {
   const { key, user } = useSelector((state) => state.auth);
   const [commentContent, setCommentContent] = useState("");
-  const [refreshComp, setRefreshComp] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault()
     let data={
         content: commentContent,
         commenter: user.id,
-        post: postId
+        post: id
     }
     console.log(data);
     let config={
@@ -29,18 +28,16 @@ const CommentForm = ({postId, getPostDetail}) => {
     .then((response) => {
       console.log(response.data);
       toastSuccessNotify('Comment added succesfully')
+      getPostDetail(post_detail)
     })
     .catch((error) => {
       console.log(error);
       toastErrorNotify('Adding comment failed')
     });
     setCommentContent('')
-    setRefreshComp(!refreshComp)
   }
-  
-  useEffect(() => {
-    getPostDetail()
-  }, [refreshComp])
+
+
   
   return (
     <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
