@@ -27,7 +27,8 @@ const Details = () => {
   const location = useLocation();
   const post_url = location.state.post_detail;
   const postId = location.state.id;
-  const [postIsViewed, setPostIsViewed] = useState(location.state.is_viewed);
+  const isPostViewed = location.state.is_viewed
+  const [postIsViewed, setPostIsViewed] = useState(isPostViewed);
   const [postDetail, setPostDetail] = useState({});
   const [isDeleteDivOpen, setIsDeleteDivOpen] = useState(false);
   const { key, user } = useSelector((state) => state.auth);
@@ -35,22 +36,7 @@ const Details = () => {
   const navigate = useNavigate();
   const isOwnPost = user.username == postDetail.writer_name
 
-  const getPostDetail = async () => {
-    let config = {
-      method: "get",
-      url: post_url,
-      headers: {
-        Authorization: `Token ${key}`,
-      },
-    };
-
-    try {
-      const { data } = await axios(config);
-      setPostDetail(data);
-    } catch (error) {
-      console.log(error);
-    }
-
+  const handleView = () => {
     if (!postIsViewed) {
       setPostIsViewed(true)
       let data = {
@@ -74,10 +60,29 @@ const Details = () => {
           console.log(error);
         });
     }
+  }
+  
+
+  const getPostDetail = async () => {
+    let config = {
+      method: "get",
+      url: post_url,
+      headers: {
+        Authorization: `Token ${key}`,
+      },
+    };
+
+    try {
+      const { data } = await axios(config);
+      setPostDetail(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getPostDetail();
+    handleView()
   }, []);
 
 
@@ -104,17 +109,20 @@ const Details = () => {
           Authorization: `Token ${key}`,
         },
       };
+
     }
 
     axios(config)
       .then((response) => {
         console.log(response);
+        getPostDetail();
       })
       .catch((error) => {
         console.log(error);
       });
-      getPostDetail();
+
   };
+
 
 const handleDeleteClick = () => {
   let config = {
