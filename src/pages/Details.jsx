@@ -22,7 +22,6 @@ import {
 import CommentForm from "../components/CommentForm";
 import loadingGif from "../assets/loading.gif";
 import defaultPostPic from "../assets/defaultPostPic.png";
-import PersonIcon from "@mui/icons-material/Person";
 
 
 
@@ -284,7 +283,7 @@ const handleDeleteClick = () => {
                     sx={{ height: "2.5rem", width: "2.5rem" }}
                   />
                 ) : (
-                  <AccountCircleIcon />
+                  <AccountCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }}/>
                 )}
               </CardActions>
             </CardActions>
