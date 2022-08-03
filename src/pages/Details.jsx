@@ -148,8 +148,6 @@ const handleDeleteClick = () => {
     console.log(error);
   });
 }
-console.log(postDetail?.comments?.length != 0);
-
   return (
     <>
     {isDeleteDivOpen ? (
@@ -191,11 +189,13 @@ console.log(postDetail?.comments?.length != 0);
               color: "#04617D",
             }}
           >
-            ──── Details ────
+            ─ Details ─
           </Typography>
           <Card
             sx={{
-              width: "37rem",
+              // width: "37rem",
+              // display: { xs: 'none', md: 'flex' } 
+              width: { xs: "100%", md: "37rem" }, 
               backgroundColor: "white",
               mx: "auto",
               mb: "2rem",
