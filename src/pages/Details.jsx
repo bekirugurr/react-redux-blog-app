@@ -39,6 +39,7 @@ const Details = () => {
   const navigate = useNavigate();
   const isOwnPost = user.username == postDetail.writer_name
 
+
   const handleView = () => {
     if (!postIsViewed) {
       setPostIsViewed(true)
@@ -147,6 +148,7 @@ const handleDeleteClick = () => {
     console.log(error);
   });
 }
+console.log(postDetail?.comments?.length != 0);
 
   return (
     <>
@@ -312,7 +314,7 @@ const handleDeleteClick = () => {
                 borderBottom: "1px solid #a2a4a556",
               }}
             >
-              Comments
+              {postDetail?.comments?.length != 0 && "Comments"}
             </Typography>
             {postDetail.comments?.map((comment) => (
               <CardActions
