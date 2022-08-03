@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import logoB from "../assets/logoB.png";
+import logo from "../assets/blognotte.png";
 import { useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import { makeStyles } from "@mui/styles";
@@ -49,10 +50,9 @@ const navbarMuiStyles = makeStyles({
   },
   middleText: {
     cursor: "pointer",
-    fontFamily: "Girassol",
     position: "absolute",
     right: "calc(50% - 5.8rem)",
-    top: ".6rem",
+    top: ".6rem"
     
   },
 });
@@ -120,16 +120,17 @@ const Navbar = () => {
             component="img"
             className={classes.logo}
             alt="Your logo."
-            src={logoB}
+            src={logo}
+            sx={{py:'3px'}}
             onClick={handleLogoClick}
           />
           <Box onClick={handleLogoClick}>
             <Typography
               variant="h5"
               className={classes.middleText}
-              sx={{ fontFamily: "Girassol", display: { xs: 'none', md: 'flex' } }}
+              sx={{ fontFamily: "Segoe", fontSize:"1.3rem", display: { xs: 'none', md: 'flex' } }}
             >
-              ────Blog────
+              "Share to inspire !"
             </Typography>
           </Box>
 
