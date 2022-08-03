@@ -40,7 +40,8 @@ const CommentForm = ({id, getPostDetail, post_detail}) => {
 
   
   return (
-    <Box component="form" autoComplete="off" onSubmit={handleSubmit}>
+    <Box component="form" autoComplete="off" onSubmit={handleSubmit} sx={{ display:"flex", flexDirection:"column", alignItems:"center", mb:'1rem'}}
+    >
       <Typography
         variant="h5"
         component="div"
@@ -50,6 +51,8 @@ const CommentForm = ({id, getPostDetail, post_detail}) => {
           fontWeight: "600",
           p: " 0 0.6rem 0.6rem",
           borderBottom: "1px solid #a2a4a556",
+          alignSelf:"start",
+          width: "100%"
         }}
       >
         Leave a comment below
@@ -62,14 +65,14 @@ const CommentForm = ({id, getPostDetail, post_detail}) => {
         required
         multiline
         minRows={5}
-        sx={{ m: "1rem", width: "32rem" }}
+        sx={{ m: "1rem",width:"100%"  }}
         value={commentContent}
         onChange={(e) => setCommentContent(e.target.value)}
       />
       <Button
         variant="contained"
         type="submit"
-        sx={{
+        sx={{width:"7rem",
           ":hover": {
             bgcolor: "#ffffff",
             color: "dodgerBlue",
