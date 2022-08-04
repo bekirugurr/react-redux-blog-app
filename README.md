@@ -42,7 +42,7 @@ Backend [repository link 🚀](https://github.com/bekirugurr/blog-API-django) fo
 * Although **form validation** was done in frontend, **it was also done in the backend.**
 * **Swagger**, **redoc**, **debug toolbar** were used. And debug was made true for other users to check easily. 
 * Finally as tiny details: 
-... **select_related** method was preferred for query optimisation. 
-... **SerializerMethodField** was preferred for field customization.
-... **Some methods were overridden** to create custom functionalities.
+**select_related** method was preferred for query optimisation. 
+**SerializerMethodField** was preferred for field customization.
+**Some methods were overridden** to create custom functionalities.
  
