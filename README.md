@@ -12,10 +12,10 @@ https://user-images.githubusercontent.com/94041207/182843431-693a7c36-42d8-4161-
 <p>After registration, log in, log out, post adding, deleting, update, profile update or comment adding  processes a notify div will appear for a while thanks to <b>react toastify.</b> This div tell whether the process is done successfully or not. If process is succesfull this div will be green, if not it will be red.</p>
 
 ## What is in the project? 
-<p > <span style=" display: inline-block;"> In this project   </span> <img style="padding: 0 0.7rem; margin-top: 0.4rem; text-align:center;" src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark-700x235.png"  alt="react" height="20"> <span style=" display: inline-block;"> is used for frontend,</span> <img style="padding: 0 0.7rem; margin-bottom: -0.4rem; text-align:center;" src="https://logos-download.com/wp-content/uploads/2019/06/Django_Logo.png"  alt="react" height="20"><span style=" display: inline-block;"> and </span><img style="padding: 0 0.7rem; margin-bottom: -0.4rem; text-align:center;" src="https://user-images.githubusercontent.com/94041207/182884012-aac975c0-b0ae-4d09-8765-e25b6fbaafc2.png"  alt="django rest framework" height="20"><span style=" display: inline-block;"> are used for backend.</span>
-</p>
-
-<p > <span style=" display: inline-block;">While in development process   </span> <img style="padding: 0 0.7rem; margin-top: 0.4rem; text-align:center;" src="https://logos-download.com/wp-content/uploads/2018/09/SQLite_Logo-450x193.png"  alt="react" height="20"> <span style=" display: inline-block;"> is used, in production process </span><span style=" display: inline-block;"> In this project   </span> <img style="padding: 0 0.7rem; margin-bottom: -0.4rem; text-align:center;" src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="react" height="20"> <span style=" display: inline-block;"> is used. </span></p>
-
+In this project:   
+* Frontend made by using  <img src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark-700x235.png"  alt="react" height="50"> 
+* Backend made by using <img src="https://user-images.githubusercontent.com/94041207/182887053-c5c9c8cf-9182-48a6-aa02-800ee0e5e24f.png"  alt="django rest framework" height="50">
+* In developoment process database is <img src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="postgresql" height="50">
+* In production process database is <img src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="sqlite" height="50"> 
 
 
