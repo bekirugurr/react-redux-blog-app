@@ -1,5 +1,7 @@
 # React Redux Blog App
-[Go to project 🚀](https://react-redux-blogapp.vercel.app/)
+<img src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark-700x235.png"  alt="react" height="30"><img src="https://user-images.githubusercontent.com/94041207/182909807-b86d1342-c3f0-4bb1-af92-3e2edb489943.png"  alt="material ui" height="30"><img src="https://user-images.githubusercontent.com/94041207/182910142-56b24d69-e5d7-4d2f-8557-c3649ed6b8ea.png"  alt="redux" height="30"><img src="https://user-images.githubusercontent.com/94041207/182910456-d3d02931-1035-44ce-b801-5d4459d1f672.png"  alt="axios" height="30"><img src="https://user-images.githubusercontent.com/94041207/182910527-3818a588-68a6-41c4-919f-75325d63112f.jpg"  alt="formik_yup" height="30"><img src="https://user-images.githubusercontent.com/94041207/182910558-4b78b2e3-7a72-4c98-98a8-b42e421c0c8a.png"  alt="react_toastify" height="30">
+<img src="https://user-images.githubusercontent.com/94041207/182887053-c5c9c8cf-9182-48a6-aa02-800ee0e5e24f.png"  alt="django rest framework" height="30"><img src="https://logos-download.com/wp-content/uploads/2018/09/SQLite_Logo-450x193.png"  alt="sqlite" height="30"><img src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="postgresql" height="30"><img src="https://user-images.githubusercontent.com/94041207/182912844-075185f7-3c3f-4d77-9f49-740dbdadd14d.png"  alt="heroku" height="30">
+## [Go to project 🚀](https://react-redux-blogapp.vercel.app/)
 ## Preview of the project:
 https://user-images.githubusercontent.com/94041207/182843431-693a7c36-42d8-4161-b916-0f59de46456e.mp4
 ## Description 
