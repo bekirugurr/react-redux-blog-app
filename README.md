@@ -32,7 +32,7 @@ Backend [repository link 🚀](https://github.com/bekirugurr/blog-API-django) fo
 * In developoment process database is <img src="https://logos-download.com/wp-content/uploads/2018/09/SQLite_Logo-450x193.png"  alt="sqlite" height="30">
 * In production process database is <img src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="postgresql" height="30"> 
 * Backend part was deployed to <img src="https://user-images.githubusercontent.com/94041207/182912844-075185f7-3c3f-4d77-9f49-740dbdadd14d.png"  alt="heroku" height="30"> 
-* While **dj rest auth** package was used for login, logout and authentication, register view and serializer were hard coded.
+* **dj rest auth** package was used for login, logout and authentication. However register view and serializer were hard coded.
 * **Concrete views** and **Viewsets** were used as views. 
 * **Nested serializers** were used. 
 * **Token authentication** was used for authentication.
