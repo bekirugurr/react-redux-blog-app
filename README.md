@@ -6,7 +6,7 @@
  <a href="https://vercel.com/" rel="nofollow"><img src="https://user-images.githubusercontent.com/94041207/199351014-f893e89f-84ab-4207-96a5-a36f077f23f5.png"  height="30" alt="Vercel" style="max-width: 100%;"></a>
 <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182919629-cb95a2ee-7628-4899-bb7b-275e1dbd3a85.png"  alt="axios" height="30"> </a>  
 <a href="#"><img src="https://user-images.githubusercontent.com/94041207/182910527-3818a588-68a6-41c4-919f-75325d63112f.jpg"  alt="formik_yup" height="30"> </a>  
-<a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910558-4b78b2e3-7a72-4c98-98a8-b42e421c0c8a.png"  alt="react_toastify" height="30"> </a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910604-1134b4d8-b7ab-438e-8dcf-1dd85961a5eb.png"  alt="vercel" height="30"> </a> </p>
+<a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910558-4b78b2e3-7a72-4c98-98a8-b42e421c0c8a.png"  alt="react_toastify" height="30"> </a></p>
 
 ## Demo
 <a href="https://react-redux-blogapp.vercel.app/" target="_blank"> Live link 🚀 </a>
