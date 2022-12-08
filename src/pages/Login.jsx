@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import formLogo from "../assets/formLogo.png";
-import googleLogo from "../assets/googleLogo.png";
+// import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ const Login = () => {
   const logIn = (data) => {
     let config = {
       method: "post",
-      url: "https://blogapp-react-redux.herokuapp.com/auth/login/",
+      url: "https://blog-api-django.onrender.com/auth/login/",
       data: data,
     };
     dispatch(setLoading());
@@ -72,7 +72,6 @@ const Login = () => {
     resetForm();
   };
 
-  const handleProviderLogin = () => {};
   return (
     <Box
       sx={{
@@ -192,7 +191,7 @@ const Login = () => {
                         LOGIN
                       </Button>
                     </Grid>
-                    <Grid item xs={12}>
+{/*                     <Grid item xs={12}>
                       <Button
                         variant="contained"
                         fullWidth
@@ -215,7 +214,7 @@ const Login = () => {
                           style={{ height: "2rem" }}
                         />
                       </Button>
-                    </Grid>
+                    </Grid> */}
                     <Grid
                       item
                       xs={12}

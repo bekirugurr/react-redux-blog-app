@@ -1,22 +1,16 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import {
   Avatar,
   Card,
   CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
   Typography,
 } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import defaultAvatar from "../assets/avatar.png";
 import ProfileForm from "../components/ProfileForm";
 
 const Profile = () => {
-  const dispatch = useDispatch();
-  const { key, user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <Card

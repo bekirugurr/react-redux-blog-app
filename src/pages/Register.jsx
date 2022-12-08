@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import formLogo from "../assets/formLogo.png";
-import googleLogo from "../assets/googleLogo.png";
+// import googleLogo from "../assets/googleLogo.png";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ try {
   dispatch(setLoading());
   let config = {
     method: 'post',
-    url:'https://blogapp-react-redux.herokuapp.com/auth/register/',
+    url:'https://blog-api-django.onrender.com/auth/register/',
     data: data
   }
   const res = await axios(config)
@@ -89,9 +89,6 @@ try {
     signUp(data)
     resetForm();
   };
-  const handleProviderSignUp = () => {
-    
-  }
 
   return (
     <Box
@@ -236,7 +233,7 @@ try {
                     SIGN UP
                   </Button>
                 </Grid>
-                <Grid item xs={12}>
+{/*                 <Grid item xs={12}>
                   <Button
                     variant="contained"
                     fullWidth
@@ -260,7 +257,7 @@ try {
                       style={{ height: "2rem" }}
                     />
                   </Button>
-                </Grid>
+                </Grid> */}
                 <Grid
                   item
                   xs={12}

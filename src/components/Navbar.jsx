@@ -9,7 +9,6 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
-import logoB from "../assets/logoB.png";
 import logo from "../assets/blognotte.png";
 import { useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
@@ -71,7 +70,7 @@ const Navbar = () => {
     localStorage.removeItem("userInfo")
     let config = {
       method : 'post',
-      url : "https://blogapp-react-redux.herokuapp.com/auth/logout/",
+      url : "https://blog-api-django.onrender.com/auth/logout/",
       headers : {
         Authorization : `Token ${key}`
       }

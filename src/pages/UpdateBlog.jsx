@@ -1,7 +1,7 @@
 import React from "react";
 import BlogForm from '../components/BlogForm'
 import formLogo from "../assets/formLogo.png";
-import { Box, Button, Card, CardMedia, Container, Typography } from '@mui/material';
+import { Card, CardMedia, Container, Typography } from '@mui/material';
 import { useLocation } from "react-router-dom";
 
 const UpdateBlog = () => {

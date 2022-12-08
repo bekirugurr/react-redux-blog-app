@@ -3,7 +3,6 @@ import {
   TextField,
   InputLabel,
   MenuItem,
-  Typography,
   Button,
   FormControl,
   Select,
@@ -33,7 +32,7 @@ const BlogForm = ({ postData }) => {
     if (postData) {
       let config = {
         method: "patch",
-        url: `https://blogapp-react-redux.herokuapp.com/post/post/${postData.id}/`,
+        url: `https://blog-api-django.onrender.com/post/post/${postData.id}/`,
         data: {
           title: postInfo.title,
           content: postInfo.content,
@@ -62,7 +61,7 @@ const BlogForm = ({ postData }) => {
     } else {
       let config = {
         method: "post",
-        url: `https://blogapp-react-redux.herokuapp.com/post/post/`,
+        url: `https://blog-api-django.onrender.com/post/post/`,
         data: postInfo,
         headers: {
           Authorization: `Token ${key}`,
@@ -127,7 +126,7 @@ const BlogForm = ({ postData }) => {
           <Select
             labelId="status-select-label"
             id="status-select"
-            value="P"
+            defaultValue="P"
             label="Status"
             value={postInfo.status}
             onChange={(e) =>
@@ -144,7 +143,7 @@ const BlogForm = ({ postData }) => {
           <Select
             labelId="category-select-label"
             id="category-select"
-            value={4}
+            defaultValue={4}
             label="Category"
             value={postInfo.category}
             onChange={(e) =>

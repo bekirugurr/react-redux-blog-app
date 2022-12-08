@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Typography,  Box, TextField, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -18,7 +18,7 @@ const CommentForm = ({id, getPostDetail, post_detail}) => {
     console.log(data);
     let config={
         method: 'post',
-        url: 'https://blogapp-react-redux.herokuapp.com/post/comment/',
+        url: 'https://blog-api-django.onrender.com/post/comment/',
         data: data,
         headers: {
             Authorization: `Token ${key}`,

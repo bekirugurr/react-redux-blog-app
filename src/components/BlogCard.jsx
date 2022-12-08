@@ -11,13 +11,10 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
 import defaultPostPic from "../assets/defaultPostPic.png";
 import { elapsedTime, determineCategoryColor, determinePostCategory } from "../helpers/functions";
 import { useSelector } from "react-redux";
 import { toastErrorNotify } from "../helpers/toastNotify";
-import defaultAvatar from "../assets/avatar.png";
-
 
 
 const BlogCard = ({

@@ -14,43 +14,44 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { key } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.app);
-  const { postsList, previousPage, nextPage } = useSelector(
+  const { postsList, nextPage } = useSelector(
     (state) => state.postData
   );
 
-  const getPosts = async () => {
-    let config = key
-      ? {
-          method: "get",
-          url: "https://blogapp-react-redux.herokuapp.com/post/post/",
-          headers: {
-            Authorization: `Token ${key}`,
-          },
-        }
-      : {
-          method: "get",
-          url: "https://blogapp-react-redux.herokuapp.com/post/post/",
-        };
-    try {
-      dispatch(setLoading());
-      const { data } = await axios(config);
-      const postsData = {
-        nextPage: data.next,
-        previousPage: data.previous,
-        postsList: data.results,
-      };
-      console.log(postsData);
-      dispatch(setPostsData(postsData));
-      dispatch(clearLoading());
-    } catch (error) {
-      console.log(error);
-      dispatch(clearLoading());
-    }
-  };
 
   useEffect(() => {
+    const getPosts = async () => {
+      let config = key
+        ? {
+            method: "get",
+            url: "https://blog-api-django.onrender.com/post/post/",
+            headers: {
+              Authorization: `Token ${key}`,
+            },
+          }
+        : {
+            method: "get",
+            url: "https://blog-api-django.onrender.com/post/post/",
+          };
+      try {
+        dispatch(setLoading());
+        const { data } = await axios(config);
+        const postsData = {
+          nextPage: data.next,
+          previousPage: data.previous,
+          postsList: data.results,
+        };
+        console.log(postsData);
+        dispatch(setPostsData(postsData));
+        dispatch(clearLoading());
+      } catch (error) {
+        console.log(error);
+        dispatch(clearLoading());
+      }
+    };
+  
     getPosts();
-  }, []);
+  }, [dispatch, key]);
 
   const handleViewMore = async() => {
     let config = key
@@ -113,7 +114,7 @@ console.log(postsList);
           >
             {postsList.map(
               (item) =>
-                item.status == "P" && (
+                item.status === "P" && (
                   <Grid key={item.id} item lg={4} md={6} sm={12}>
                     <BlogCard {...item} />
                   </Grid>

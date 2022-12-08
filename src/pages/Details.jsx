@@ -9,24 +9,18 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Avatar from "@mui/material/Avatar";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import {
-  elapsedTime,
-  determineCategoryColor,
-  determinePostCategory,
-} from "../helpers/functions";
+import { elapsedTime } from "../helpers/functions";
 import CommentForm from "../components/CommentForm";
 import loadingGif from "../assets/loading.gif";
 import defaultPostPic from "../assets/defaultPostPic.png";
 
 
-
 const Details = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const post_url = location.state.post_detail;
   const postId = location.state.id;
@@ -37,7 +31,7 @@ const Details = () => {
   const { key, user } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.app);
   const navigate = useNavigate();
-  const isOwnPost = user.username == postDetail.writer_name
+  const isOwnPost = user.username === postDetail.writer_name
 
 
   const handleView = () => {
@@ -49,7 +43,7 @@ const Details = () => {
       };
       let config = {
         method: "post",
-        url: "https://blogapp-react-redux.herokuapp.com/post/view/",
+        url: "https://blog-api-django.onrender.com/post/view/",
         data: data,
         headers: {
           Authorization: `Token ${key}`,
@@ -96,7 +90,7 @@ const Details = () => {
     if (postDetail.is_liked) {
       config = {
         method: "delete",
-        url: `https://blogapp-react-redux.herokuapp.com/post/like/${postDetail.like_id}`,
+        url: `https://blog-api-django.onrender.com/post/like/${postDetail.like_id}`,
         headers: {
           Authorization: `Token ${key}`,
         },
@@ -104,7 +98,7 @@ const Details = () => {
     } else {
       config = {
         method: "post",
-        url: `https://blogapp-react-redux.herokuapp.com/post/like/`,
+        url: `https://blog-api-django.onrender.com/post/like/`,
         data: {
           post: postDetail.id,
           who_liked: user.id,
@@ -131,7 +125,7 @@ const Details = () => {
 const handleDeleteClick = () => {
   let config = {
     method: "delete",
-    url: `https://blogapp-react-redux.herokuapp.com/post/post/${postDetail.id}`,
+    url: `https://blog-api-django.onrender.com/post/post/${postDetail.id}`,
     data: {
       post: postDetail.id,
     },
@@ -314,7 +308,7 @@ const handleDeleteClick = () => {
                 borderBottom: "1px solid #a2a4a556",
               }}
             >
-              {postDetail?.comments?.length != 0 && "Comments"}
+              {postDetail?.comments?.length !== 0 && "Comments"}
             </Typography>
             {postDetail.comments?.map((comment) => (
               <CardActions
@@ -332,7 +326,7 @@ const handleDeleteClick = () => {
                   Comment by <b>{comment.commenter_name}</b> -{" "}
                   <b>{elapsedTime(comment.date_stamp)}</b> ago
                 </Typography>
-                <Typography sx={{ fontSize: "1rem" }}>
+                <Typography sx={{ fontSize: "1rem", textAlign: "left" }}>
                   {comment.content}
                 </Typography>
               </CardActions>

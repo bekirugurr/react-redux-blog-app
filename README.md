@@ -31,7 +31,7 @@ In this project:
 * Default post picture and profile picture were used for the situations that user does not upload.
 * **Responsiveness** for different screen size was done. 
 ### In Backend
-Backend [repository link 🚀](https://github.com/bekirugurr/blog-API-django) for to look and [project link 🚀](https://blogapp-react-redux.herokuapp.com/) for to check with postman
+Backend [repository link 🚀](https://github.com/bekirugurr/blog-API-django) for to look and [project link 🚀](https://blog-api-django.onrender.com/) for to check with postman
 * In developoment process database is <img src="https://logos-download.com/wp-content/uploads/2018/09/SQLite_Logo-450x193.png"  alt="sqlite" height="30">
 * In production process database is <img src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="postgresql" height="30"> 
 * Backend part was deployed to <img src="https://user-images.githubusercontent.com/94041207/182912844-075185f7-3c3f-4d77-9f49-740dbdadd14d.png"  alt="heroku" height="30"> 
