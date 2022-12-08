@@ -1,9 +1,16 @@
 # React Redux Blog App
-<p><a href="#"><img src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark-700x235.png"  alt="react" height="30"> </a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182909807-b86d1342-c3f0-4bb1-af92-3e2edb489943.png"  alt="material ui" height="30"> </a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910142-56b24d69-e5d7-4d2f-8557-c3649ed6b8ea.png"  alt="redux" height="30"></a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182919629-cb95a2ee-7628-4899-bb7b-275e1dbd3a85.png"  alt="axios" height="30"> </a>  <a href="#"><img src="https://user-images.githubusercontent.com/94041207/182910527-3818a588-68a6-41c4-919f-75325d63112f.jpg"  alt="formik_yup" height="30"> </a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910558-4b78b2e3-7a72-4c98-98a8-b42e421c0c8a.png"  alt="react_toastify" height="30"> </a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910604-1134b4d8-b7ab-438e-8dcf-1dd85961a5eb.png"  alt="vercel" height="30"> </a> </p>
-<p><a href="#"><img src="https://user-images.githubusercontent.com/94041207/182887053-c5c9c8cf-9182-48a6-aa02-800ee0e5e24f.png"  alt="django rest framework" height="30"> </a>  <a href="#"> <img src="https://logos-download.com/wp-content/uploads/2018/09/SQLite_Logo-450x193.png"  alt="sqlite" height="30"> </a>  <a href="#"> <img src="https://icon-library.com/images/postgresql-icon/postgresql-icon-13.jpg"  alt="postgresql" height="30"> </a>  <a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182912844-075185f7-3c3f-4d77-9f49-740dbdadd14d.png"  alt="heroku" height="30"></a> </p>
+<p>
+<a href="https://reactjs.org/" rel="nofollow"><img src="https://user-images.githubusercontent.com/94041207/199491176-6fbe9d1f-d04c-4a6c-bdaf-ec4a6a397dfc.png" height="30" alt="React" data-canonical-src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="max-width: 100%;"></a>
+<a href="https://redux.js.org/" rel="nofollow"><img src="https://user-images.githubusercontent.com/94041207/199491190-3b78537e-4e77-430d-9fda-056ec9ed0a98.png" height="30" alt="Redux" data-canonical-src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" style="max-width: 100%;"></a>
+<a href="https://mui.com/" rel="nofollow"><img src="https://user-images.githubusercontent.com/94041207/199491393-4d2641bb-371e-4600-981f-095ba95b0652.png"  height="30" alt="Material UI" data-canonical-src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg" style="max-width: 100%;"></a>
+<a href="https://vercel.com/" rel="nofollow"><img src="https://user-images.githubusercontent.com/94041207/199493665-4c2af34d-d636-4bc5-98e8-896019462af0.png"  height="30" alt="Vercel" style="max-width: 100%;"></a>
+<a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182919629-cb95a2ee-7628-4899-bb7b-275e1dbd3a85.png"  alt="axios" height="30"> </a>  
+<a href="#"><img src="https://user-images.githubusercontent.com/94041207/182910527-3818a588-68a6-41c4-919f-75325d63112f.jpg"  alt="formik_yup" height="30"> </a>  
+<a href="#"> <img src="https://user-images.githubusercontent.com/94041207/182910558-4b78b2e3-7a72-4c98-98a8-b42e421c0c8a.png"  alt="react_toastify" height="30"> </a></p>
 
-## <a href="https://react-redux-blogapp.vercel.app/" target="_blank"> Go to project 🚀 </a>
-## Preview of the project:
+## Demo
+<a href="https://react-redux-blogapp.vercel.app/" target="_blank"> Live link 🚀 </a>
+## Preview of the project
 https://user-images.githubusercontent.com/94041207/182843431-693a7c36-42d8-4161-b916-0f59de46456e.mp4
 ## Description 
 <p>In this project, it is aimed to create blog posts and display them on the dashboard. There are six cards on the dashboard. When the <b>View More</b> button is clicked, six more cards are loaded thanks to <b>pegination</b> (if there is six more cards). </p>
